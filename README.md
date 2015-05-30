@@ -2,6 +2,8 @@
 
 browser package to check if the element is on screen.
 
+[![npm version](https://badge.fury.io/js/viewability.svg)](https://www.npmjs.com/package/viewability) [![Bower version](https://badge.fury.io/bo/viewability.svg)](http://badge.fury.io/bo/viewability) 
+
 ```js
 var vertical = require('viewability/vertical');
 vertical(document.getElementById('blue-box'));
