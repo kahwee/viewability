@@ -10,6 +10,20 @@ vertical(document.getElementById('blue-box'));
 
 Use `'viewability/horizontal'` for corresponding view.
 
+# Installation
+
+From `npm`:
+
+```sh
+npm install --save viewability
+```
+
+From `bower`:
+
+```sh
+bower install --save viewability
+```
+
 # I want to find out if element is 100% on screen
 
 ```js
