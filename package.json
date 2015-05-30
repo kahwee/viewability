@@ -1,10 +1,10 @@
 {
   "name": "viewability",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "description": "Returns how viewable an element is",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start"
   },
   "keywords": [
     "viewable",
@@ -12,5 +12,14 @@
     "advertising"
   ],
   "author": "KahWee Teng <t@kw.sg> (http://kw.sg/)",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jquery": "^2.1.4",
+    "karma": "^0.12.35",
+    "karma-browserify": "^4.2.1",
+    "karma-chrome-launcher": "^0.1.12",
+    "karma-coverage": "^0.3.1",
+    "karma-mocha": "^0.1.10",
+    "karma-sinon-chai": "^0.3.0"
+  }
 }

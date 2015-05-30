@@ -36,6 +36,12 @@ if (v.horizontal(el).value === 0 && v.vertical(el).value === 0) {
 }
 ```
 
+# Running tests
+
+```sh
+npm test
+```
+
 # License
 
-ISC.
+ISC

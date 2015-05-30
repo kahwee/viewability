@@ -1,7 +1,8 @@
 {
   "name": "viewability",
   "main": "index.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
+  "description": "Returns how viewable an element is",
   "homepage": "https://github.com/kahwee/viewability",
   "authors": [
     "KahWee Teng <t@kw.sg>"
