@@ -1,0 +1,11 @@
+{
+  "name": "viewability",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KahWee Teng <t@kw.sg> (http://kw.sg/)",
+  "license": "ISC"
+}
