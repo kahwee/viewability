@@ -1,0 +1,25 @@
+{
+  "name": "viewability",
+  "main": "index.js",
+  "version": "1.0.0",
+  "homepage": "https://github.com/kahwee/viewability",
+  "authors": [
+    "KahWee Teng <t@kw.sg>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "viewable",
+    "viewability",
+    "advertising"
+  ],
+  "license": "ISC",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
