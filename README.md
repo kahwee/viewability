@@ -1,6 +1,6 @@
 # viewability
 
-browser package to check if the element is on screen.
+browser package to check if the element is on screen. Or you can call it visibility.
 
 [![npm version](https://badge.fury.io/js/viewability.svg)](https://www.npmjs.com/package/viewability) [![Bower version](https://badge.fury.io/bo/viewability.svg)](http://badge.fury.io/bo/viewability) 
 
@@ -40,7 +40,10 @@ if (v.horizontal(el).value === 0 && v.vertical(el).value === 0) {
 
 # Running tests
 
+While `viewability` has no dependencies, testing uses Karma and jQuery.
+
 ```sh
+npm install
 npm test
 ```
 

@@ -11,6 +11,14 @@
     "viewability",
     "advertising"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kahwee/viewability.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kahwee/viewability/issues"
+  },
+  "homepage": "https://github.com/kahwee/viewability",
   "author": "KahWee Teng <t@kw.sg> (http://kw.sg/)",
   "license": "ISC",
   "devDependencies": {
