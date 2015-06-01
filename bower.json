@@ -1,5 +1,5 @@
 {
-  "name": "viewability",
+  "name": "viewability-gh-pages",
   "version": "1.0.1",
   "homepage": "https://github.com/kahwee/viewability",
   "authors": [
@@ -14,6 +14,7 @@
     "tests"
   ],
   "dependencies": {
-    "jquery-ui": "~1.11.4"
+    "jquery-ui": "~1.11.4",
+    "viewability": "~1.1.0"
   }
 }

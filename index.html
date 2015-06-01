@@ -6,7 +6,7 @@
 				position: relative;
 				font-family: sans-serif;
 			}
-			#draggable {
+			#draggable1, #draggable2 {
 				position: absolute;
 				left: 30px;
 				top: 30px;
@@ -14,14 +14,19 @@
 				height: 300px;
 				text-align: center;
 				line-height: 300px;
-				background: black;
-				color: #777;
+				color: white;
 				position: relative;
 			}
-			#viewability-value {
+			#draggable1 {
+				background: red;
+			}
+			#draggable2 {
+				background: blue;
+			}
+			.value {
 				font-size: 128px;
 			}
-			#viewability-reason {
+			.reason {
 				position: absolute;
 				top: 80px;
 				text-align: center;
@@ -32,18 +37,18 @@
 	</head>
 
 	<body>
-		<h1>Drag the black box around</h1>
-		<div id="draggable" draggable="true">
-			<div id="viewability-value"></div>
-			<div id="viewability-reason"></div>
+		<h1>Drag the black box around, red is vertical, blue is horizontal.</h1>
+		<div id="draggable1" draggable="true">
+			<div class="value"></div>
+			<div class="reason"></div>
+		</div>
+		<div id="draggable2" draggable="true">
+			<div class="value"></div>
+			<div class="reason"></div>
 		</div>
 		<script src="bower_components/jquery/dist/jquery.min.js"></script>
 		<script src="bower_components/jquery-ui/jquery-ui.js"></script>
-		<script>
-			module = {};
-			module.exports = {};
-		</script>
-		<script src="node_modules/viewability/vertical.js"></script>
+		<script src="bower_components/viewability/dist/viewability.js"></script>
 		<script src="app.js"></script>
 	</body>
 </html>

@@ -1,6 +1,10 @@
 # viewability
 
-browser package to check if the element is on screen.
+browser package to check if the element is on screen without dependencies. Or you can call it visibility.
+
+[![npm version](https://badge.fury.io/js/viewability.svg)](https://www.npmjs.com/package/viewability)
+[![Bower version](https://badge.fury.io/bo/viewability.svg)](http://badge.fury.io/bo/viewability) 
+[![devDependency Status](https://david-dm.org/kahwee/viewability/dev-status.svg)](https://david-dm.org/kahwee/viewability#info=devDependencies)
 
 ```js
 var vertical = require('viewability/vertical');
@@ -9,6 +13,8 @@ vertical(document.getElementById('blue-box'));
 ```
 
 Use `'viewability/horizontal'` for corresponding view.
+
+See demo: https://kahwee.github.io/viewability/
 
 # Installation
 
@@ -38,7 +44,10 @@ if (v.horizontal(el).value === 0 && v.vertical(el).value === 0) {
 
 # Running tests
 
+While `viewability` has no dependencies, testing uses Karma and jQuery.
+
 ```sh
+npm install
 npm test
 ```
 
