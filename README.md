@@ -28,11 +28,11 @@ See demo: https://kahwee.github.io/viewability/
 Loading it directly to the browser with `viewability` exposed to the window:
 
 ```html
-<script src="bower_components/viewability/dist/viewability.js"></script>
+<script src="//cdn.jsdelivr.net/viewability/1.1.2/viewability.min.js"></script>
 <script>
-var v = viewability.vertical(document.getElementById('red-box'));
-console.log(v);
-// return {value: 0.83, state: "EL_IS_WITHIN_VERTICAL_VIEW"}
+  var v = viewability.vertical(document.getElementById('red-box'));
+  console.log(v);
+  // return {value: 0.83, state: "EL_IS_WITHIN_VERTICAL_VIEW"}
 </script>
 ```
 
