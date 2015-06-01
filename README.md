@@ -30,7 +30,20 @@ From `bower`:
 bower install --save viewability
 ```
 
-# I want to find out if element is 100% on screen
+# Usage
+
+Loading it directly to the browser with `viewability` exposed to the window:
+
+```html
+<script src="bower_components/viewability/dist/viewability.js"></script>
+<script>
+var v = viewability.vertical(document.getElementById('red-box'));
+console.log(v);
+// return {value: 0.83, state: "EL_IS_WITHIN_VERTICAL_VIEW"}
+</script>
+```
+
+Finding out if the element is 100% on screen and using Common JS:
 
 ```js
 var v = require('viewability');

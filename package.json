@@ -1,6 +1,6 @@
 {
   "name": "viewability",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Returns how viewable an element is",
   "main": "dist/viewability.js",
   "scripts": {
