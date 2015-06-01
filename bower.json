@@ -1,0 +1,19 @@
+{
+  "name": "viewability",
+  "version": "1.0.1",
+  "homepage": "https://github.com/kahwee/viewability",
+  "authors": [
+    "KahWee Teng <t@kw.sg>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-ui": "~1.11.4"
+  }
+}

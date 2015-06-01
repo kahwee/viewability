@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				position: relative;
+				font-family: sans-serif;
+			}
+			#draggable {
+				position: absolute;
+				left: 30px;
+				top: 30px;
+				width: 400px;
+				height: 300px;
+				text-align: center;
+				line-height: 300px;
+				background: black;
+				color: #777;
+				position: relative;
+			}
+			#viewability-value {
+				font-size: 128px;
+			}
+			#viewability-reason {
+				position: absolute;
+				top: 80px;
+				text-align: center;
+				width: 400px;
+				font-size: 18px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="draggable" draggable="true">
+			<div id="viewability-value"></div>
+			<div id="viewability-reason"></div>
+		</div>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+		<script>
+			module = {};
+			module.exports = {};
+		</script>
+		<script src="node_modules/viewability/vertical.js"></script>
+		<script src="app.js"></script>
+	</body>
+</html>
