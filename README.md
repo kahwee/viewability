@@ -14,7 +14,7 @@ vertical(document.getElementById('blue-box'));
 
 Use `'viewability/horizontal'` for corresponding view.
 
-See demo: https://kahwee.github.io/viewability/
+[See demo](https://kahwee.github.io/viewability/)
 
 # Installation
 
