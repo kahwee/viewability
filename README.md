@@ -18,17 +18,9 @@ See demo: https://kahwee.github.io/viewability/
 
 # Installation
 
-From `npm`:
-
-```sh
-npm install --save viewability
-```
-
-From `bower`:
-
-```sh
-bower install --save viewability
-```
+* [Bower](http://bower.io/): `bower install --save viewability`
+* [npm](https://www.npmjs.org/): `npm install --save viewability`
+* Direct download the latest version: https://github.com/kahwee/viewability/releases
 
 # Usage
 
