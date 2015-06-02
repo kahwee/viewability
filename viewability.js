@@ -1,4 +1,5 @@
 module.exports = {
 	vertical: require('./vertical'),
-	horizontal: require('./horizontal')
+	horizontal: require('./horizontal'),
+	isElementOnScreen: require('./isElementOnScreen')
 };
