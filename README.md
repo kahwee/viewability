@@ -28,7 +28,7 @@ Use `'viewability/horizontal'` for corresponding view.
 Loading it directly to the browser with `viewability` exposed to the window:
 
 ```html
-<script src="//cdn.jsdelivr.net/viewability/1.1.2/viewability.min.js"></script>
+<script src="//cdn.jsdelivr.net/viewability/latest/viewability.min.js"></script>
 <script>
   var v = viewability.vertical(document.getElementById('red-box'));
   console.log(v);
