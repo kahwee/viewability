@@ -1,10 +1,12 @@
 # viewability
 
-browser package to check if the element is on screen without dependencies. Or you can call it visibility.
+Browser package to check if the element is on screen without dependencies. Or you can call it visibility.
 
 [![npm version](https://badge.fury.io/js/viewability.svg)](https://www.npmjs.com/package/viewability)
 [![Bower version](https://badge.fury.io/bo/viewability.svg)](http://badge.fury.io/bo/viewability) 
 [![devDependency Status](https://david-dm.org/kahwee/viewability/dev-status.svg)](https://david-dm.org/kahwee/viewability#info=devDependencies)
+
+No dependencies.
 
 ```js
 var vertical = require('viewability/vertical');
@@ -25,6 +27,8 @@ Use `'viewability/horizontal'` for corresponding view.
 
 # Usage
 
+## `viewability` package through CDN:
+
 Loading it directly to the browser with `viewability` exposed to the window:
 
 ```html
@@ -35,6 +39,8 @@ Loading it directly to the browser with `viewability` exposed to the window:
   // return {value: 0.83, state: "EL_IS_WITHIN_VERTICAL_VIEW"}
 </script>
 ```
+
+## Using Common JS:
 
 Finding out if the element is 100% on screen and using Common JS:
 
