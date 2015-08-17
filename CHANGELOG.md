@@ -1,3 +1,6 @@
+## v1.2.1 - 2015-08-17
+* Update depedencies
+
 ## v1.2.0 - 2015-06-02
 * added isElementOnScreen
 

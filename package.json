@@ -1,6 +1,6 @@
 {
   "name": "viewability",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Returns how viewable an element is",
   "main": "dist/viewability.js",
   "scripts": {
@@ -32,14 +32,14 @@
   "author": "KahWee Teng <t@kw.sg> (http://kw.sg/)",
   "license": "ISC",
   "devDependencies": {
-    "browserify": "^10.2.3",
+    "browserify": "^11.0.1",
     "jquery": "^2.1.4",
-    "karma": "^0.12.35",
-    "karma-browserify": "^4.2.1",
-    "karma-chrome-launcher": "^0.1.12",
-    "karma-coverage": "^0.3.1",
-    "karma-mocha": "^0.1.10",
-    "karma-sinon-chai": "^0.3.0",
-    "uglify-js": "^2.4.23"
+    "karma": "^0.13.9",
+    "karma-browserify": "^4.3.0",
+    "karma-chrome-launcher": "^0.2.0",
+    "karma-coverage": "^0.5.0",
+    "karma-mocha": "^0.2.0",
+    "karma-sinon-chai": "^1.0.0",
+    "uglify-js": "^2.4.24"
   }
 }
