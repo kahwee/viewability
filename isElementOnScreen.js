@@ -4,6 +4,6 @@ module.exports = function(el, full) {
 	if (full) {
 		return vertical(el).value * horizontal(el).value === 1;
 	} else {
-		return vertical(el).value > 0 || horizontal(el).value > 0;
+		return vertical(el).value * horizontal(el).value > 0;
 	}
 };

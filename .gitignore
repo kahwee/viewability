@@ -95,4 +95,4 @@ bower_components
 /coverage
 /docs
 _karma.xml
-
+.idea
