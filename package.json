@@ -6,7 +6,7 @@
   "scripts": {
     "browserify": "browserify viewability.js --standalone=viewability -o dist/viewability.js",
     "uglify": "uglifyjs -c -m -o dist/viewability.min.js dist/viewability.js",
-    "lint": "eslint *.js",
+    "lint": "eslint *.js tests",
     "build": "npm run browserify && npm run uglify",
     "test": "karma start"
   },
