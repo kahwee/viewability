@@ -20,10 +20,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kahwee/viewability.git"
-  },
-  "repository": {
-    "type": "git",
     "url": "https://github.com/kahwee/viewability.git"
   },
   "bugs": {
@@ -44,6 +40,7 @@
     "karma-coverage": "^0.5.3",
     "karma-mocha": "^0.2.1",
     "karma-sinon-chai": "^1.1.0",
+    "mocha": "^2.3.4",
     "uglify-js": "^2.6.1"
   }
 }

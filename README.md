@@ -18,7 +18,12 @@ vertical(document.getElementById('blue-box'));
 
 Use `'viewability/horizontal'` for corresponding view.
 
-[See demo](https://kahwee.github.io/viewability/)
+# Demo
+
+Both source code are in the `gh-pages` branch.
+
+[Draggable-based example](https://kahwee.github.io/viewability/)
+[Timer-based example](https://kahwee.github.io/viewability/timer.html)
 
 # Installation
 
@@ -57,7 +62,6 @@ if (v.isElementOnScreen(el, true)) {
   console.log('not on screen at all');
 }
 ```
-
 # Running tests
 
 While `viewability` has no dependencies, testing uses Karma and jQuery.
