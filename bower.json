@@ -1,6 +1,5 @@
 {
   "name": "viewability-gh-pages",
-  "version": "1.0.1",
   "homepage": "https://github.com/kahwee/viewability",
   "authors": [
     "KahWee Teng <t@kw.sg>"
@@ -14,7 +13,7 @@
     "tests"
   ],
   "dependencies": {
-    "viewability": "~1.1.0",
-    "interact": "~1.2.4"
+    "viewability": "~1.2.2",
+    "interact": "~1.2.6"
   }
 }

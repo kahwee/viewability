@@ -59,11 +59,11 @@ function dragMoveListener(event) {
 function calculate(draggable) {
 	var v = viewability.vertical(draggable);
 	var h = viewability.horizontal(draggable);
-	document.getElementById('info').innerHTML = '<h3>Vertical:</h3><p>' + v.value.toFixed(2) + '<br>' + v.state + '</p><h3>Horizontal:</h3><p>' + h.value.toFixed(2) + '<br>' + h.state + '</p><h3>Combined viewability index (vertical x horizontal)</h3><p>' + (h.value * v.value).toFixed(2);
+	document.getElementById('info').innerHTML = '<h3>Vertical:</h3><p>' + v.value.toFixed(2) + '<br>' + v.state + '</p><h3>Horizontal:</h3><p>' + h.value.toFixed(2) + '<br>' + h.state + '</p><h3>Combined viewability index (vertical x horizontal)</h3><p>' + (h.value * v.value).toFixed(2) + '</p>'
 }
 
 calculate(document.getElementById('draggable'));
 
-window.addEventListener('scroll', function() {
+document.addEventListener('scroll', function() {
 	calculate(document.getElementById('draggable'));
 })

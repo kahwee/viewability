@@ -49,6 +49,17 @@ module.exports = function(el) {
 };
 
 },{}],2:[function(require,module,exports){
+var horizontal = require('./horizontal');
+var vertical = require('./vertical');
+module.exports = function(el, full) {
+	if (full) {
+		return vertical(el).value * horizontal(el).value === 1;
+	} else {
+		return vertical(el).value * horizontal(el).value > 0;
+	}
+};
+
+},{"./horizontal":1,"./vertical":3}],3:[function(require,module,exports){
 module.exports = function(el) {
 	var windowHeight = window.innerHeight;
 	var elemTop = el.getBoundingClientRect().top;
@@ -98,11 +109,12 @@ module.exports = function(el) {
 	};
 };
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports = {
 	vertical: require('./vertical'),
-	horizontal: require('./horizontal')
+	horizontal: require('./horizontal'),
+	isElementOnScreen: require('./isElementOnScreen')
 };
 
-},{"./horizontal":1,"./vertical":2}]},{},[3])(3)
+},{"./horizontal":1,"./isElementOnScreen":2,"./vertical":3}]},{},[4])(4)
 });

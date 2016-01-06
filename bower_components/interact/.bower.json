@@ -1,6 +1,6 @@
 {
   "name": "interact",
-  "version": "1.2.4",
+  "version": "1.2.6",
   "main": "interact.js",
   "description": "Drag and drop, resizing and multi-touch gestures with inertia and snapping for modern browsers (and also IE8+)",
   "homepage": "http://interactjs.io",
@@ -45,14 +45,13 @@
     "img",
     "docs"
   ],
-  "_release": "1.2.4",
+  "_release": "1.2.6",
   "_resolution": {
     "type": "version",
-    "tag": "v1.2.4",
-    "commit": "5364889b615026421b40fb870e2cdd9fae38a968"
+    "tag": "v1.2.6",
+    "commit": "9bc2445db99c34a8be8e19ddbd086f73ea4ed483"
   },
   "_source": "git://github.com/taye/interact.js.git",
-  "_target": "~1.2.4",
-  "_originalSource": "interact",
-  "_direct": true
+  "_target": "~1.2.6",
+  "_originalSource": "interact"
 }

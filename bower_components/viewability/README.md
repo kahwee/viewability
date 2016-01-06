@@ -1,10 +1,14 @@
 # viewability
 
-browser package to check if the element is on screen without dependencies. Or you can call it visibility.
+Browser package to check if the element is on screen without dependencies. Or you can call it visibility.
 
 [![npm version](https://badge.fury.io/js/viewability.svg)](https://www.npmjs.com/package/viewability)
-[![Bower version](https://badge.fury.io/bo/viewability.svg)](http://badge.fury.io/bo/viewability) 
+[![Bower version](https://badge.fury.io/bo/viewability.svg)](http://badge.fury.io/bo/viewability)
 [![devDependency Status](https://david-dm.org/kahwee/viewability/dev-status.svg)](https://david-dm.org/kahwee/viewability#info=devDependencies)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
+[![bitHound Score](https://www.bithound.io/github/kahwee/viewability/badges/score.svg)](https://www.bithound.io/github/kahwee/viewability)
+
+No dependencies.
 
 ```js
 var vertical = require('viewability/vertical');
@@ -14,31 +18,43 @@ vertical(document.getElementById('blue-box'));
 
 Use `'viewability/horizontal'` for corresponding view.
 
-See demo: https://kahwee.github.io/viewability/
+[See demo](https://kahwee.github.io/viewability/)
 
 # Installation
 
-From `npm`:
+* [Bower](http://bower.io/): `bower install --save viewability`
+* [npm](https://www.npmjs.org/): `npm install --save viewability`
+* Direct download the latest version: https://github.com/kahwee/viewability/releases
+* [jsDelivr CDN](http://www.jsdelivr.com/#!viewability): `<script src="//cdn.jsdelivr.net/viewability/VERSION/viewability.min.js"></script>`
 
-```sh
-npm install --save viewability
+# Usage
+
+## `viewability` package through CDN:
+
+Loading it directly to the browser with `viewability` exposed to the window:
+
+```html
+<script src="//cdn.jsdelivr.net/viewability/latest/viewability.min.js"></script>
+<script>
+  var v = viewability.vertical(document.getElementById('red-box'));
+  console.log(v);
+  // return {value: 0.83, state: "EL_IS_WITHIN_VERTICAL_VIEW"}
+</script>
 ```
 
-From `bower`:
+## Using Common JS:
 
-```sh
-bower install --save viewability
-```
-
-# I want to find out if element is 100% on screen
+Finding out if the element is 100% on screen and using Common JS:
 
 ```js
 var v = require('viewability');
 var el = document.getElementById('blue-box');
-if (v.horizontal(el).value === 0 && v.vertical(el).value === 0) {
-  console.log('100% on screen.')
-} else if (v.horizontal(el).value > 0 || v.value(el).value > 0) {
-  console.log('Part of element in on screen.')
+if (v.isElementOnScreen(el, true)) {
+  console.log('100% on screen.');
+} else if (v.isElementOnScreen(el)) {
+  console.log('Some parts are on screen');
+} else {
+  console.log('not on screen at all');
 }
 ```
 
