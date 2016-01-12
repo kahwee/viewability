@@ -1,3 +1,6 @@
+## v1.2.3 - 2016-01-11
+* Fix for viewability in npm
+
 ## v1.2.2 - 2015-11-24
 * Make sure isElementOnScreen return false for this condition. Thanks @msk86
 * Update devDependencies and rebuilt.
