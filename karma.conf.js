@@ -1,10 +1,10 @@
 module.exports = function (config) {
-  var headless = process.env.USER === 'jenkins'
+  var headless = process.env.CI === 'true'
   var preprocessors = {}
   preprocessors['./*.js'] = ['coverage']
   preprocessors['./tests/**/*.js'] = ['browserify']
 
-  var browsers = headless ? ['PhantomJS'] : ['Chrome']
+  var browsers = headless ? ['Firefox'] : ['Chrome']
 
   config.set({
     basePath: '.',
