@@ -1,7 +1,7 @@
 module.exports = function (config) {
   var headless = process.env.USER === 'jenkins'
   var preprocessors = {}
-  preprocessors['./js/**/*.js'] = ['coverage']
+  preprocessors['./*.js'] = ['coverage']
   preprocessors['./tests/**/*.js'] = ['browserify']
 
   var browsers = headless ? ['PhantomJS'] : ['Chrome']
@@ -14,10 +14,14 @@ module.exports = function (config) {
     preprocessors: preprocessors,
     files: [
       './node_modules/jquery/dist/jquery.js',
+      'vertical.js',
+      'horizontal.js',
+      'viewability.js',
       './tests/*.js'
     ],
     browserify: {
       debug: true,
+      transform: ['browserify-istanbul'],
       configure: function (bundle) {
         bundle.on('prebundle', function () {})
       }
