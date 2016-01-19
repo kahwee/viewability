@@ -1,3 +1,6 @@
+## v1.2.4 - 2016-01-18
+* Add test cases for isElementOnScreen()
+
 ## v1.2.3 - 2016-01-11
 * Fix for viewability in npm
 
