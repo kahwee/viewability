@@ -1,6 +1,6 @@
 {
   "name": "viewability",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Returns how viewable an element is",
   "main": "viewability.js",
   "scripts": {
@@ -29,6 +29,8 @@
   "author": "KahWee Teng <t@kw.sg> (http://kw.sg/)",
   "license": "ISC",
   "devDependencies": {
+    "babel-preset-es2015": "^6.3.13",
+    "babelify": "^7.2.0",
     "browserify": "^13.0.0",
     "browserify-istanbul": "^0.2.1",
     "eslint": "^1.10.3",

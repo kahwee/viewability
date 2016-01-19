@@ -15,7 +15,16 @@ describe('horizontal', function () {
   it('should be off the screen at the very right', function (done) {
     test.style.left = '5000px'
     var result = horizontal(test)
-    expect(result.value).to.be.equal(0)
+    expect(result.state).to.equal('EL_IS_TOO_RIGHT')
+    expect(result.value).to.equal(0)
+    done()
+  })
+
+  it('should be off the screen at the very left', function (done) {
+    test.style.left = '-5000px'
+    var result = horizontal(test)
+    expect(result.state).to.equal('EL_IS_TOO_LEFT')
+    expect(result.value).to.equal(0)
     done()
   })
 })

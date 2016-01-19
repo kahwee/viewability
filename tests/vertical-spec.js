@@ -15,6 +15,15 @@ describe('vertical', function () {
   it('should be off the screen at the very bottom', function (done) {
     test.style.top = '5000px'
     var result = vertical(test)
+    expect(result.state).to.equal('EL_IS_BELOW_VIEW')
+    expect(result.value).to.be.equal(0)
+    done()
+  })
+
+  it('should be off the screen at the very top', function (done) {
+    test.style.top = '-5000px'
+    var result = vertical(test)
+    expect(result.state).to.equal('EL_IS_ABOVE_VIEW')
     expect(result.value).to.be.equal(0)
     done()
   })

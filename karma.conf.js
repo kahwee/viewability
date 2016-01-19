@@ -8,20 +8,17 @@ module.exports = function (config) {
 
   config.set({
     basePath: '.',
-    reporters: ['coverage'],
+    reporters: ['progress', 'coverage'],
     frameworks: ['browserify', 'mocha', 'sinon-chai'],
     browsers: browsers,
     preprocessors: preprocessors,
     files: [
       './node_modules/jquery/dist/jquery.js',
-      'vertical.js',
-      'horizontal.js',
-      'viewability.js',
       './tests/*.js'
     ],
     browserify: {
       debug: true,
-      transform: ['browserify-istanbul'],
+      transform: ['babelify', 'browserify-istanbul'],
       configure: function (bundle) {
         bundle.on('prebundle', function () {})
       }
