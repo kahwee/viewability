@@ -2,6 +2,8 @@
 
 Browser package to check if the element is on screen without dependencies. Or you can call it visibility.
 
+[![Build Status](https://travis-ci.org/kahwee/viewability.svg?branch=master)](https://travis-ci.org/kahwee/viewability)
+[![Coverage Status](https://coveralls.io/repos/github/kahwee/viewability/badge.svg?branch=master)](https://coveralls.io/github/kahwee/viewability?branch=master)
 [![npm version](https://badge.fury.io/js/viewability.svg)](https://www.npmjs.com/package/viewability)
 [![Bower version](https://badge.fury.io/bo/viewability.svg)](http://badge.fury.io/bo/viewability)
 [![devDependency Status](https://david-dm.org/kahwee/viewability/dev-status.svg)](https://david-dm.org/kahwee/viewability#info=devDependencies)

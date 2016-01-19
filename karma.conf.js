@@ -34,14 +34,20 @@ module.exports = function (config) {
     },
     coverageReporter: {
       dir: 'coverage',
-      reporters: [{
-        type: 'cobertura',
-        subdir: '.',
-        file: 'cobertura.xml'
-      }, {
-        type: 'html',
-        subdir: '.'
-      }]
+      reporters: [
+        { type: 'lcov',
+          subdir: 'report-lcov'
+        },
+        {
+          type: 'cobertura',
+          subdir: '.',
+          file: 'cobertura.xml'
+        }, {
+          absolutePath: true,
+          type: 'html',
+          subdir: '.'
+        }
+      ]
     },
     singleRun: headless
   // logLevel: 'DEBUG'
