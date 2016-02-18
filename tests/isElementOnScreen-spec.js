@@ -17,5 +17,4 @@ describe('isElementOnScreen', function () {
     expect(result).to.be.false
     done()
   })
-
 })
