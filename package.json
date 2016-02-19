@@ -51,7 +51,7 @@
     "karma-mocha": "^0.2.2",
     "karma-sinon-chai": "^1.2.0-rc1",
     "mocha": "^2.4.5",
-    "standard": "^6.0.5",
+    "standard": "^6.0.6",
     "uglify-js": "^2.6.1"
   }
 }
