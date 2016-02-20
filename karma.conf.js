@@ -9,7 +9,7 @@ module.exports = function (config) {
   config.set({
     basePath: '.',
     reporters: ['progress', 'coverage'],
-    frameworks: ['browserify', 'mocha', 'sinon-chai'],
+    frameworks: ['browserify', 'mocha', 'chai'],
     browsers: browsers,
     preprocessors: preprocessors,
     files: [
