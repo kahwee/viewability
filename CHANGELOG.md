@@ -1,3 +1,7 @@
+## v1.2.5 - 2016-06-21
+
+* Update of dependencies
+
 ## v1.2.4 - 2016-01-18
 * Add test cases for isElementOnScreen()
 
