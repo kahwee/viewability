@@ -1,7 +1,6 @@
 {
   "name": "viewability",
   "main": "dist/viewability.js",
-  "version": "1.2.1",
   "description": "Returns how viewable an element is",
   "homepage": "https://github.com/kahwee/viewability",
   "authors": [

@@ -11,7 +11,7 @@ describe('isElementOnScreen', function () {
     done()
   })
 
-  it('should be start with being visible', function (done) {
+  it('should be not visible', function (done) {
     test.style.left = '5000px'
     var result = isElementOnScreen(test)
     expect(result).to.be.false

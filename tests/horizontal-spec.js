@@ -1,11 +1,18 @@
-/* jshint ignore:start */
-'use strict'
-$('<div id="htest" style="background: red; position: absolute; top: 0; left: 0; height: 40px; width: 40px"></div>').appendTo($(document.body))
-
-var horizontal = window.horizontal = require('../horizontal')
-var test = document.getElementById('htest')
-
 describe('horizontal', function () {
+  var horizontal = window.horizontal = require('../horizontal')
+  var test
+
+  beforeEach(function () {
+    test = document.createElement('div')
+    test.setAttribute('style', 'background: red; position: absolute; height: 40px; width: 40px')
+    test.id = 'htest'
+    document.body.appendChild(test)
+  })
+
+  afterEach(function () {
+    test.remove()
+  })
+
   it('should be start with being visible', function (done) {
     var result = horizontal(test)
     expect(result.value).to.be.equal(1)
@@ -27,5 +34,19 @@ describe('horizontal', function () {
     expect(result.value).to.equal(0)
     done()
   })
+
+  it('should be off the screen left truncated', function (done) {
+    test.style.left = '-1px'
+    var result = horizontal(test)
+    expect(result.state).to.equal('EL_LEFT_TRUNCATED')
+    done()
+  })
+
+  it('should be off the screen right truncated', function (done) {
+    test.style.right = '-1px'
+    console.dir(test.style)
+    var result = horizontal(test)
+    expect(result.state).to.equal('EL_RIGHT_TRUNCATED')
+    done()
+  })
 })
-/* jshint ignore:end */
