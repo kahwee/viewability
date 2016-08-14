@@ -83,7 +83,7 @@ vertical(document.getElementById('blue-box'));
 
 # Running tests
 
-While `viewability` has no dependencies, testing uses Karma and jQuery.
+While `viewability` has no dependencies, testing uses Karma.
 
 ```sh
 npm install

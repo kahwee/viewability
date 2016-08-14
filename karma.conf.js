@@ -13,7 +13,6 @@ module.exports = function (config) {
     browsers: browsers,
     preprocessors: preprocessors,
     files: [
-      './node_modules/jquery/dist/jquery.js',
       './tests/*.js'
     ],
     browserify: {
