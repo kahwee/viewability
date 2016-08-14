@@ -43,8 +43,7 @@ describe('vertical', function () {
   })
 
   it('should be off the screen bottom truncated', function (done) {
-    test.style.bottom = '-1px'
-    console.dir(test.style)
+    test.style.bottom = '-10px'
     var result = vertical(test)
     expect(result.state).to.equal('EL_BOTTOM_TRUNCATED')
     done()

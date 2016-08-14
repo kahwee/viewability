@@ -64,6 +64,23 @@ if (v.isElementOnScreen(el, true)) {
   console.log('not on screen at all');
 }
 ```
+
+Use only vertical:
+
+```
+var vertical = require('viewability/vertical');
+vertical(document.getElementById('blue-box'));
+// return {value: 1, state: "EL_IS_WITHIN_VERTICAL_VIEW"}
+```
+
+Use only horizontal:
+
+```
+var horizontal = require('viewability/horizontal');
+vertical(document.getElementById('blue-box'));
+// return {value: 1, state: "EL_IS_WITHIN_HORIZONTAL_VIEW"}
+```
+
 # Running tests
 
 While `viewability` has no dependencies, testing uses Karma and jQuery.

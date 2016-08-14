@@ -44,7 +44,6 @@ describe('horizontal', function () {
 
   it('should be off the screen right truncated', function (done) {
     test.style.right = '-1px'
-    console.dir(test.style)
     var result = horizontal(test)
     expect(result.state).to.equal('EL_RIGHT_TRUNCATED')
     done()
