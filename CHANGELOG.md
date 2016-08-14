@@ -1,3 +1,7 @@
+## v1.2.7 - 2016-08-14
+* Fix mistake of broken test cases
+* Switch to Phantomjs
+
 ## v1.2.6 - 2016-08-14
 * Improved test cases
 * Update of dependencies
