@@ -1,5 +1,11 @@
 describe('vertical', function () {
-  var vertical = window.vertical = require('../vertical')
+  var vertical = window.vertical = require('../vertical')  
+  var configBottom = { offsetBottom: 10 }
+  var configTop = { offsetTop: 10 }
+  var docHeight = document.documentElement.clientHeight
+  var quarterDoc = docHeight / 4
+  var configBoth = { offsetTop: quarterDoc, offsetBottom: quarterDoc }
+
   var test
 
   beforeEach(function () {
@@ -48,4 +54,44 @@ describe('vertical', function () {
     expect(result.state).to.equal('EL_BOTTOM_TRUNCATED')
     done()
   })
+
+  it('should start with not being visible', function (done) {
+    var result = vertical(test, configTop)
+    expect(result.state).to.equal('EL_TOP_TRUNCATED')
+    expect(result.value).to.be.equal(.75)
+    done()
+  })
+
+  it('should be on the screen, when offsetTop is taken into account', function (done) {
+    test.style.top = '10px'
+    var result = vertical(test, configTop)
+    expect(result.state).to.equal('EL_IS_WITHIN_VERTICAL_VIEW')
+    expect(result.value).to.equal(1)
+    done()
+  })
+
+  it('should be off the screen, when offsetBottom is taken into account', function (done) {
+    test.style.bottom = '0px'
+    var result = vertical(test, configBottom)
+    expect(result.state).to.equal('EL_BOTTOM_TRUNCATED')
+    expect(result.value).to.equal(.75)
+    done()
+  })
+
+  it('should be off the screen, when offsetBottom is taken into account', function (done) {
+    test.style.bottom = '10px'
+    var result = vertical(test, configBottom)
+    expect(result.state).to.equal('EL_IS_WITHIN_VERTICAL_VIEW')
+    expect(result.value).to.equal(1)
+    done()
+  })
+
+  it('should be off the screen in both directions, when offsetTop and offsetBottom are taken into account', function (done) {
+    test.style.height = `${docHeight}px`
+    var result = vertical(test, configBoth)
+    expect(result.state).to.equal('EL_BOTTOM_AND_TOP_TRUNCATED')
+    expect(result.value).to.equal(.5)
+    done()
+  })
+
 })
