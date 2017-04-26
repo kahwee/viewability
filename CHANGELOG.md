@@ -1,3 +1,7 @@
+## v1.3.0 - 2017-04-26
+* Added config object, allowing for cropping of viewport boundaries when appraising percent inview
+* Updated unit tests and docs to support feature addition
+
 ## v1.2.7 - 2016-08-14
 * Fix mistake of broken test cases
 * Switch to Phantomjs

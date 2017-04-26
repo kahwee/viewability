@@ -73,12 +73,30 @@ vertical(document.getElementById('blue-box'));
 // return {value: 1, state: "EL_IS_WITHIN_VERTICAL_VIEW"}
 ```
 
+Use only vertical with offset:
+
+```
+var vertical = require('viewability/vertical');
+var config = { offsetTop: 25, offsetBottom: 25 }
+vertical(document.getElementById('blue-box'), config);
+// return {value: .5, state: "EL_BOTTOM_AND_TOP_TRUNCATED"}
+```
+
 Use only horizontal:
 
 ```
 var horizontal = require('viewability/horizontal');
-vertical(document.getElementById('blue-box'));
+horizontal(document.getElementById('blue-box'));
 // return {value: 1, state: "EL_IS_WITHIN_HORIZONTAL_VIEW"}
+```
+
+Use only horizontal with offset:
+
+```
+var horizontal = require('viewability/horizontal');
+var config = { offsetLeft: 25, offsetRight: 25 };
+horizontal(document.getElementById('blue-box'), config);
+// return {value: .5, state: "EL_LEFT_AND_RIGHT_TRUNCATED"}
 ```
 
 # Running tests
