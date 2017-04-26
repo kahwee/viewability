@@ -1,43 +1,67 @@
-module.exports = function (el) {
-  var windowHeight = window.innerHeight
-  var elemTop = el.getBoundingClientRect().top
-  var elemBottom = el.getBoundingClientRect().bottom
-  var elemHeight = elemBottom - elemTop
-  if (elemTop > windowHeight) {
-    // Not viewable, below viewport
+/**
+  A method for calculating the percentage of an element inside of a given region of the viewport
+  @param {element} el Element from the DOM
+  @param {object} config Object containing specifications for the viewability appraisal
+  @param {number} config.offsetRight Number of pixels to offset on the righthand side of the viewport
+  @param {number} config.offsetLeft Number of pixels to offset on the lefthand side of the viewport
+  @return {object} Object containing a `value` property, denoting the percent of the element inside of the active viewport, and a `state` property consisting of string, denoting the element's in-view status
+ */
+
+module.exports = function (el, config = {}) {
+  
+    // Get the cropped righthand boundary
+  const windowWidth = window.innerWidth;
+  const offsetRight = config.offsetRight || 0;
+  const rightBound = windowWidth - offsetRight;
+
+  // Get the cropped lefthand boundary:
+  const leftBound = config.offsetLeft || 0;
+
+  // Get the cropped viewport size, to later evaluate percent of element in view
+  const activeViewportWidth = rightBound - leftBound;
+
+  // Get element specs:
+  const elemRect = el.getBoundingClientRect();
+  const elemLeft = elemRect.left;
+  const elemRight = elemRect.right;
+  const elemWidth = elemRight - elemLeft;
+  
+  // Evaluate element's position in the cropped viewport:
+  if (elemLeft > rightBound) {
+    // Not viewable, to right of viewport
     return {
       value: 0,
-      state: 'EL_IS_BELOW_VIEW'
+      state: 'EL_IS_TOO_RIGHT'
     }
-  } else if (elemBottom <= 0) {
-    // Not viewable, above the viewport
+  } else if (elemRight <= leftBound) {
+    // Not viewable, to left of viewport
     return {
       value: 0,
-      state: 'EL_IS_ABOVE_VIEW'
+      state: 'EL_IS_TOO_LEFT'
     }
-  } else if (elemTop >= 0 && elemBottom <= windowHeight) {
+  } else if (elemLeft >= leftBound && elemRight <= rightBound) {
     // Element is completely visible
     return {
       value: 1,
-      state: 'EL_IS_WITHIN_VERTICAL_VIEW'
+      state: 'EL_IS_WITHIN_HORIZONTAL_VIEW'
     }
-  } else if (elemTop < 0 && elemBottom > windowHeight) {
-    // Top and bottom of element truncated
+  } else if (elemLeft < leftBound && elemRight > rightBound) {
+    // Left and right of element truncated
     return {
-      value: windowHeight / elemHeight,
-      state: 'EL_BOTTOM_AND_TOP_TRUNCATED'
+      value: activeViewportWidth / elemWidth,
+      state: 'EL_LEFT_AND_RIGHT_TRUNCATED'
     }
-  } else if (elemTop < 0 && elemBottom <= windowHeight) {
-    // Top of element is truncated
+  } else if (elemLeft < leftBound && elemRight <= rightBound) {
+    // Left of element is truncated
     return {
-      value: elemBottom / elemHeight,
-      state: 'EL_TOP_TRUNCATED'
+      value: (elemRight - leftBound) / elemWidth,
+      state: 'EL_LEFT_TRUNCATED'
     }
-  } else if (elemTop >= 0 && elemBottom > windowHeight) {
-    // Bottom of element is trunctaed
+  } else if (elemLeft >= leftBound && elemRight > rightBound) {
+    // Right of element is trunctaed
     return {
-      value: (windowHeight - elemTop) / elemHeight,
-      state: 'EL_BOTTOM_TRUNCATED'
+      value: (activeViewportWidth - elemLeft) / elemWidth,
+      state: 'EL_RIGHT_TRUNCATED'
     }
   }
   // Generic error
