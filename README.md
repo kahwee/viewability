@@ -1,5 +1,7 @@
 # viewability
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/kahwee/viewability.svg)](https://greenkeeper.io/)
+
 Browser package to check if the element is on screen without dependencies. Or you can call it visibility.
 
 [![Build Status](https://travis-ci.org/kahwee/viewability.svg?branch=master)](https://travis-ci.org/kahwee/viewability)
