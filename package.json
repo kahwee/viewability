@@ -4,7 +4,7 @@
   "description": "Returns how viewable an element is",
   "main": "viewability.js",
   "scripts": {
-    "browserify": "browserify viewability.js --standalone=viewability -o dist/viewability.js",
+    "browserify": "browserify viewability.js --standalone=viewability -o dist/viewability.js -t [ babelify --presets [ es2015 ] ]",
     "uglify": "uglifyjs -c -m -o dist/viewability.min.js dist/viewability.js",
     "lint": "standard etc/**/*.js tests/**/*.js",
     "build": "npm run browserify && npm run uglify",
