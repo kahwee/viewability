@@ -1,3 +1,23 @@
 {
-  "presets": ["es2015"]
+  "env": {
+    "test": {
+      "plugins": [
+        ["istanbul", {
+          "exclude": [
+            "**/*-spec.js"
+          ]
+        }]
+      ]
+    }
+  },
+  "presets": [
+    ["env", {
+      "targets": {
+        "browsers": [
+        	"last 2 versions",
+        	"safari >= 7"
+        ]
+      }
+    }]
+  ]
 }

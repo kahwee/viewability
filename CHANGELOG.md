@@ -1,3 +1,7 @@
+## v1.3.0 - 2017-06-18
+* No longer include .min
+* Add webpack
+
 ## v1.2.7 - 2016-08-14
 * Fix mistake of broken test cases
 * Switch to Phantomjs
