@@ -1,13 +1,12 @@
 # viewability
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/kahwee/viewability.svg)](https://greenkeeper.io/)
-
 Browser package to check if the element is on screen without dependencies. Or you can call it visibility.
 
 [![Build Status](https://travis-ci.org/kahwee/viewability.svg?branch=master)](https://travis-ci.org/kahwee/viewability)
 [![Coverage Status](https://coveralls.io/repos/github/kahwee/viewability/badge.svg?branch=master)](https://coveralls.io/github/kahwee/viewability?branch=master)
 [![npm version](https://badge.fury.io/js/viewability.svg)](https://www.npmjs.com/package/viewability)
 [![Bower version](https://badge.fury.io/bo/viewability.svg)](http://badge.fury.io/bo/viewability)
+[![Greenkeeper badge](https://badges.greenkeeper.io/kahwee/viewability.svg)](https://greenkeeper.io/)
 [![devDependency Status](https://david-dm.org/kahwee/viewability/dev-status.svg)](https://david-dm.org/kahwee/viewability#info=devDependencies)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
 [![bitHound Score](https://www.bithound.io/github/kahwee/viewability/badges/score.svg)](https://www.bithound.io/github/kahwee/viewability)
