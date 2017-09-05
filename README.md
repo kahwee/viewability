@@ -33,7 +33,7 @@ Both source code are in the `gh-pages` branch.
 * [Bower](http://bower.io/): `bower install --save viewability`
 * [npm](https://www.npmjs.org/): `npm install --save viewability`
 * Direct download the latest version: https://github.com/kahwee/viewability/releases
-* [jsDelivr CDN](http://www.jsdelivr.com/#!viewability): `<script src="//cdn.jsdelivr.net/viewability/VERSION/viewability.min.js"></script>`
+* [jsDelivr CDN](http://www.jsdelivr.com/#!viewability): `<script src="https://cdn.jsdelivr.net/npm/viewability@VERSION/dist/viewability.min.js"></script>`
 
 # Usage
 
@@ -42,7 +42,7 @@ Both source code are in the `gh-pages` branch.
 Loading it directly to the browser with `viewability` exposed to the window:
 
 ```html
-<script src="//cdn.jsdelivr.net/viewability/latest/viewability.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/viewability@latest/dist/viewability.min.js"></script>
 <script>
   var v = viewability.vertical(document.getElementById('red-box'));
   console.log(v);
