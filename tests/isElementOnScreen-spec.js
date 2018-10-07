@@ -1,3 +1,4 @@
+/* eslint no-unused-expressions: 0 */
 describe('isElementOnScreen', function () {
   var isElementOnScreen = require('../isElementOnScreen')
   var test

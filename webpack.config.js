@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs')
-let babelRc = JSON.parse(fs.readFileSync('./.babelrc', {encoding: 'utf8'}))
+let babelRc = JSON.parse(fs.readFileSync('./.babelrc', { encoding: 'utf8' }))
 module.exports = {
   entry: {
     'viewability': './viewability.js'
