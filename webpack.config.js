@@ -3,7 +3,7 @@ const fs = require('fs')
 let babelRc = JSON.parse(fs.readFileSync('./.babelrc', { encoding: 'utf8' }))
 module.exports = {
   entry: {
-    'viewability': './viewability.js'
+    viewability: './viewability.js'
   },
   output: {
     filename: '[name].js',
@@ -13,7 +13,6 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(bower_components)/,
         use: {
           loader: 'babel-loader',
           options: Object.assign(babelRc, {
@@ -23,12 +22,14 @@ module.exports = {
       },
       {
         test: /\.xml/,
-        use: [{
-          loader: 'html-loader',
-          options: {
-            minimize: true
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: true
+            }
           }
-        }]
+        ]
       }
     ]
   }

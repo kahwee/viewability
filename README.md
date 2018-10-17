@@ -5,7 +5,6 @@ Browser package to check if the element is on screen without dependencies. Or yo
 [![Build Status](https://travis-ci.org/kahwee/viewability.svg?branch=master)](https://travis-ci.org/kahwee/viewability)
 [![Coverage Status](https://coveralls.io/repos/github/kahwee/viewability/badge.svg?branch=master)](https://coveralls.io/github/kahwee/viewability?branch=master)
 [![npm version](https://badge.fury.io/js/viewability.svg)](https://www.npmjs.com/package/viewability)
-[![Bower version](https://badge.fury.io/bo/viewability.svg)](http://badge.fury.io/bo/viewability)
 [![Greenkeeper badge](https://badges.greenkeeper.io/kahwee/viewability.svg)](https://greenkeeper.io/)
 [![devDependency Status](https://david-dm.org/kahwee/viewability/dev-status.svg)](https://david-dm.org/kahwee/viewability#info=devDependencies)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg?style=flat)](https://github.com/feross/standard)
@@ -13,8 +12,8 @@ Browser package to check if the element is on screen without dependencies. Or yo
 No dependencies.
 
 ```js
-var vertical = require('viewability/vertical');
-vertical(document.getElementById('blue-box'));
+var vertical = require("viewability/vertical");
+vertical(document.getElementById("blue-box"));
 // return {value: 1, state: "EL_IS_WITHIN_VERTICAL_VIEW"}
 ```
 
@@ -29,10 +28,9 @@ Both source code are in the `gh-pages` branch.
 
 # Installation
 
-* [Bower](http://bower.io/): `bower install --save viewability`
-* [npm](https://www.npmjs.org/): `npm install --save viewability`
-* Direct download the latest version: https://github.com/kahwee/viewability/releases
-* [jsDelivr CDN](http://www.jsdelivr.com/#!viewability): `<script src="https://cdn.jsdelivr.net/npm/viewability@VERSION/dist/viewability.min.js"></script>`
+- [npm](https://www.npmjs.org/): `npm install --save viewability`
+- Direct download the latest version: https://github.com/kahwee/viewability/releases
+- [jsDelivr CDN](http://www.jsdelivr.com/#!viewability): `<script src="https://cdn.jsdelivr.net/npm/viewability@VERSION/dist/viewability.min.js"></script>`
 
 # Usage
 
@@ -54,14 +52,14 @@ Loading it directly to the browser with `viewability` exposed to the window:
 Finding out if the element is 100% on screen and using Common JS:
 
 ```js
-var v = require('viewability');
-var el = document.getElementById('blue-box');
+var v = require("viewability");
+var el = document.getElementById("blue-box");
 if (v.isElementOnScreen(el, true)) {
-  console.log('100% on screen.');
+  console.log("100% on screen.");
 } else if (v.isElementOnScreen(el)) {
-  console.log('Some parts are on screen');
+  console.log("Some parts are on screen");
 } else {
-  console.log('not on screen at all');
+  console.log("not on screen at all");
 }
 ```
 
