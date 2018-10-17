@@ -1,6 +1,6 @@
 {
   "name": "viewability",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "description": "Returns how viewable an element is",
   "main": "viewability.js",
   "scripts": {
@@ -42,7 +42,7 @@
     "@babel/core": "^7.1.2",
     "@babel/preset-env": "^7.1.0",
     "babel-loader": "^8.0.4",
-    "babel-plugin-istanbul": "^5.0.1",
+    "babel-plugin-istanbul": "^5.1.0",
     "babel-polyfill": "6.26.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.2",
