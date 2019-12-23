@@ -42,7 +42,7 @@
     "@babel/core": "^7.4.5",
     "@babel/preset-env": "^7.4.5",
     "babel-loader": "^8.0.6",
-    "babel-plugin-istanbul": "^5.1.4",
+    "babel-plugin-istanbul": "^6.0.0",
     "babel-polyfill": "6.26.0",
     "chai": "^4.2.0",
     "coveralls": "^3.0.2",
