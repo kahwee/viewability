@@ -39,7 +39,7 @@
   "author": "KahWee Teng <tengkahwee@gmail.com> (https://kw.sg/)",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.4.5",
+    "@babel/core": "^7.10.1",
     "@babel/preset-env": "^7.4.5",
     "babel-loader": "^8.0.6",
     "babel-plugin-istanbul": "^5.1.4",
