@@ -1,6 +1,6 @@
 describe('vertical', function () {
-  var vertical = window.vertical = require('../vertical')
-  var test
+  const vertical = window.vertical = require('../vertical')
+  let test
 
   beforeEach(function () {
     test = document.createElement('div')
@@ -14,14 +14,14 @@ describe('vertical', function () {
   })
 
   it('should be start with being visible', function (done) {
-    var result = vertical(test)
+    const result = vertical(test)
     expect(result.value).to.be.equal(1)
     done()
   })
 
   it('should be off the screen at the very bottom', function (done) {
     test.style.top = '5000px'
-    var result = vertical(test)
+    const result = vertical(test)
     expect(result.state).to.equal('EL_IS_BELOW_VIEW')
     expect(result.value).to.be.equal(0)
     done()
@@ -29,7 +29,7 @@ describe('vertical', function () {
 
   it('should be off the screen at the very top', function (done) {
     test.style.top = '-5000px'
-    var result = vertical(test)
+    const result = vertical(test)
     expect(result.state).to.equal('EL_IS_ABOVE_VIEW')
     expect(result.value).to.be.equal(0)
     done()
@@ -37,14 +37,14 @@ describe('vertical', function () {
 
   it('should be off the screen top truncated', function (done) {
     test.style.top = '-1px'
-    var result = vertical(test)
+    const result = vertical(test)
     expect(result.state).to.equal('EL_TOP_TRUNCATED')
     done()
   })
 
   it('should be off the screen bottom truncated', function (done) {
     test.style.bottom = '-10px'
-    var result = vertical(test)
+    const result = vertical(test)
     expect(result.state).to.equal('EL_BOTTOM_TRUNCATED')
     done()
   })

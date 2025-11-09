@@ -1,7 +1,7 @@
 /* eslint no-unused-expressions: 0 */
 describe('isElementOnScreen', function () {
-  var isElementOnScreen = require('../isElementOnScreen')
-  var test
+  const isElementOnScreen = require('../isElementOnScreen')
+  let test
 
   beforeEach(function () {
     test = document.createElement('div')
@@ -15,14 +15,14 @@ describe('isElementOnScreen', function () {
   })
 
   it('should be start with being visible', function (done) {
-    var result = isElementOnScreen(test)
+    const result = isElementOnScreen(test)
     expect(result).to.be.true
     done()
   })
 
   it('should be not visible', function (done) {
     test.style.left = '-5000px'
-    var result = isElementOnScreen(test)
+    const result = isElementOnScreen(test)
     expect(result).to.be.false
     done()
   })
