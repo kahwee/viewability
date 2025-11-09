@@ -1,16 +1,28 @@
+/**
+ * @typedef {Object} ViewabilityResult
+ * @property {number} value - A number between 0 and 1 representing the viewability percentage
+ * @property {string} state - The state of the element's viewability
+ */
+
+/**
+ * Calculates the horizontal viewability of an element
+ * @param {HTMLElement} el - The element to check
+ * @returns {ViewabilityResult} Object containing the viewability value and state
+ */
 module.exports = function (el) {
-  var windowWidth = window.innerWidth
-  var elemLeft = el.getBoundingClientRect().left
-  var elemRight = el.getBoundingClientRect().right
-  var elemWidth = elemRight - elemLeft
+  const windowWidth = window.innerWidth
+  const elemLeft = el.getBoundingClientRect().left
+  const elemRight = el.getBoundingClientRect().right
+  const elemWidth = elemRight - elemLeft
+
   if (elemLeft > windowWidth) {
-    // Not viewable, below viewport
+    // Not viewable, to the right of viewport
     return {
       value: 0,
       state: 'EL_IS_TOO_RIGHT'
     }
   } else if (elemRight <= 0) {
-    // Not viewable, above the viewport
+    // Not viewable, to the left of viewport
     return {
       value: 0,
       state: 'EL_IS_TOO_LEFT'
@@ -22,24 +34,25 @@ module.exports = function (el) {
       state: 'EL_IS_WITHIN_HORIZONTAL_VIEW'
     }
   } else if (elemLeft < 0 && elemRight > windowWidth) {
-    // Top and bottom of element truncated
+    // Left and right of element truncated
     return {
       value: windowWidth / elemWidth,
       state: 'EL_LEFT_AND_RIGHT_TRUNCATED'
     }
   } else if (elemLeft < 0 && elemRight <= windowWidth) {
-    // Top of element is truncated
+    // Left of element is truncated
     return {
       value: elemRight / elemWidth,
       state: 'EL_LEFT_TRUNCATED'
     }
   } else if (elemLeft >= 0 && elemRight > windowWidth) {
-    // Bottom of element is trunctaed
+    // Right of element is truncated
     return {
       value: (windowWidth - elemLeft) / elemWidth,
       state: 'EL_RIGHT_TRUNCATED'
     }
   }
+
   // Generic error
   return {
     value: 0,
