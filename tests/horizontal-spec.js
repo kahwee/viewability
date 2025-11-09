@@ -1,6 +1,6 @@
 describe('horizontal', function () {
-  var horizontal = window.horizontal = require('../horizontal')
-  var test
+  const horizontal = window.horizontal = require('../horizontal')
+  let test
 
   beforeEach(function () {
     test = document.createElement('div')
@@ -14,14 +14,14 @@ describe('horizontal', function () {
   })
 
   it('should be start with being visible', function (done) {
-    var result = horizontal(test)
+    const result = horizontal(test)
     expect(result.value).to.be.equal(1)
     done()
   })
 
   it('should be off the screen at the very right', function (done) {
     test.style.left = '5000px'
-    var result = horizontal(test)
+    const result = horizontal(test)
     expect(result.state).to.equal('EL_IS_TOO_RIGHT')
     expect(result.value).to.equal(0)
     done()
@@ -29,7 +29,7 @@ describe('horizontal', function () {
 
   it('should be off the screen at the very left', function (done) {
     test.style.left = '-5000px'
-    var result = horizontal(test)
+    const result = horizontal(test)
     expect(result.state).to.equal('EL_IS_TOO_LEFT')
     expect(result.value).to.equal(0)
     done()
@@ -37,14 +37,14 @@ describe('horizontal', function () {
 
   it('should be off the screen left truncated', function (done) {
     test.style.left = '-1px'
-    var result = horizontal(test)
+    const result = horizontal(test)
     expect(result.state).to.equal('EL_LEFT_TRUNCATED')
     done()
   })
 
   it('should be off the screen right truncated', function (done) {
     test.style.right = '-1px'
-    var result = horizontal(test)
+    const result = horizontal(test)
     expect(result.state).to.equal('EL_RIGHT_TRUNCATED')
     done()
   })

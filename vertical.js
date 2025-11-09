@@ -1,8 +1,20 @@
+/**
+ * @typedef {Object} ViewabilityResult
+ * @property {number} value - A number between 0 and 1 representing the viewability percentage
+ * @property {string} state - The state of the element's viewability
+ */
+
+/**
+ * Calculates the vertical viewability of an element
+ * @param {HTMLElement} el - The element to check
+ * @returns {ViewabilityResult} Object containing the viewability value and state
+ */
 module.exports = function (el) {
-  var windowHeight = window.innerHeight
-  var elemTop = el.getBoundingClientRect().top
-  var elemBottom = el.getBoundingClientRect().bottom
-  var elemHeight = elemBottom - elemTop
+  const windowHeight = window.innerHeight
+  const elemTop = el.getBoundingClientRect().top
+  const elemBottom = el.getBoundingClientRect().bottom
+  const elemHeight = elemBottom - elemTop
+
   if (elemTop > windowHeight) {
     // Not viewable, below viewport
     return {
@@ -34,12 +46,13 @@ module.exports = function (el) {
       state: 'EL_TOP_TRUNCATED'
     }
   } else if (elemTop >= 0 && elemBottom > windowHeight) {
-    // Bottom of element is trunctaed
+    // Bottom of element is truncated
     return {
       value: (windowHeight - elemTop) / elemHeight,
       state: 'EL_BOTTOM_TRUNCATED'
     }
   }
+
   // Generic error
   return {
     value: 0,
