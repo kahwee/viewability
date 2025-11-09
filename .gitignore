@@ -88,9 +88,12 @@ build
 
 node_modules
 npm-debug.log
+package-lock.json
+yarn-error.log
 
 *.map
 /coverage
 /docs
 _karma.xml
 .idea
+.vscode
