@@ -1,3 +1,11 @@
+## Unreleased
+
+- Reimplemented the package in strict TypeScript with shared axis geometry.
+- Added a combined `measure` API that reads the element rectangle once.
+- Added ESM, CommonJS, browser, and TypeScript declaration builds.
+- Replaced Karma, Mocha, Babel, Webpack, and Travis with Vitest, tsup, esbuild, and GitHub Actions.
+- Added full geometry coverage and installed-package compatibility tests.
+
 ## v1.3.0 - 2017-06-18
 * No longer include .min
 * Add webpack
