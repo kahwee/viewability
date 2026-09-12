@@ -2,66 +2,41 @@
   "name": "viewability",
   "version": "1.3.4",
   "description": "Returns how viewable an element is",
-  "main": "viewability.js",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "require": "./dist/index.cjs" },
+    "./vertical": { "types": "./dist/vertical.d.ts", "import": "./dist/vertical.js", "require": "./dist/vertical.cjs" },
+    "./horizontal": { "types": "./dist/horizontal.d.ts", "import": "./dist/horizontal.js", "require": "./dist/horizontal.cjs" },
+    "./isElementOnScreen": { "types": "./dist/is-element-on-screen.d.ts", "import": "./dist/is-element-on-screen.js", "require": "./dist/is-element-on-screen.cjs" },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist", "README.md", "LICENSE", "CHANGELOG.md"],
   "scripts": {
-    "lint": "standard '*.js' 'tests/**/*.js'",
-    "build": "webpack",
-    "test": "cross-env NODE_ENV=test karma start",
-    "coveralls": "cat ./coverage/report-lcov/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "clean": "node scripts/clean.mjs",
+    "build": "npm run clean && npm run build:modules && tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --minify --format=iife --global-name=viewability --outfile=dist/viewability.min.js && node scripts/create-cjs-wrappers.mjs",
+    "build:modules": "esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts --bundle --sourcemap --target=es2020 --outdir=dist --format=esm && esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts --bundle --sourcemap --target=es2020 --outdir=dist --format=cjs --out-extension:.js=.bundle.cjs",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:package": "node scripts/test-package.mjs",
+    "check": "npm run typecheck && npm test && npm run test:coverage && npm run build && npm run test:package",
+    "prepublishOnly": "npm run check"
   },
-  "keywords": [
-    "viewable",
-    "viewability",
-    "advertising",
-    "advertisement",
-    "screen",
-    "element"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kahwee/viewability.git"
-  },
-  "bugs": {
-    "url": "https://github.com/kahwee/viewability/issues"
-  },
-  "standard": {
-    "globals": [
-      "it",
-      "before",
-      "after",
-      "beforeEach",
-      "afterEach",
-      "expect",
-      "describe"
-    ],
-    "ignore": [
-      "dist/**",
-      "coverage/**",
-      "node_modules/**"
-    ]
-  },
+  "keywords": ["viewable", "viewability", "advertising", "advertisement", "screen", "element"],
+  "repository": { "type": "git", "url": "https://github.com/kahwee/viewability.git" },
+  "bugs": { "url": "https://github.com/kahwee/viewability/issues" },
   "homepage": "https://github.com/kahwee/viewability",
   "author": "KahWee Teng <tengkahwee@gmail.com> (https://kw.sg/)",
   "license": "ISC",
+  "engines": { "node": ">=20" },
   "devDependencies": {
-    "@babel/core": "^7.25.0",
-    "@babel/preset-env": "^7.25.0",
-    "babel-loader": "^9.2.0",
-    "babel-plugin-istanbul": "^7.0.0",
-    "chai": "^4.5.0",
-    "core-js": "^3.39.0",
-    "coveralls": "^3.1.1",
-    "cross-env": "^7.0.3",
-    "karma": "^6.4.4",
-    "karma-chai": "^0.1.0",
-    "karma-chrome-launcher": "^3.2.0",
-    "karma-coverage": "^2.2.1",
-    "karma-mocha": "^2.0.1",
-    "karma-webpack": "^5.0.1",
-    "mocha": "^10.8.0",
-    "mocha-lcov-reporter": "^1.3.0",
-    "standard": "^17.1.2",
-    "webpack": "^5.96.0",
-    "webpack-cli": "^5.1.4"
+    "@vitest/coverage-v8": "^5.0.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.0"
   }
 }
