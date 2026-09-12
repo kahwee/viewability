@@ -1,0 +1,56 @@
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    name: Validate and release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out tagged source
+        uses: actions/checkout@v7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Validate tag and package version
+        run: node scripts/validate-release-tag.mjs "$GITHUB_REF_NAME"
+      - name: Install dependencies
+        run: npm ci
+      - name: Verify source, package, and consumers
+        run: npm run check
+      - name: Audit production dependencies
+        run: npm audit --omit=dev
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-all-${{ hashFiles('package-lock.json') }}
+      - name: Install browser system dependencies
+        run: npx playwright install-deps chromium firefox webkit
+      - name: Install browser binaries
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install chromium firefox webkit
+      - name: Run all browser tests
+        run: npx playwright test
+      - name: Assemble release artifacts
+        run: |
+          mkdir release
+          npm pack --ignore-scripts --pack-destination release
+          cp dist/viewability.min.js release/
+          sha256sum release/* > release/SHA256SUMS
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" release/* --verify-tag --generate-notes --title "viewability $GITHUB_REF_NAME"

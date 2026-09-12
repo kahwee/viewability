@@ -1,6 +1,6 @@
 {
   "name": "viewability",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Returns how viewable an element is",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -113,8 +113,11 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:package": "node scripts/test-package.mjs",
+    "test:consumers": "node scripts/test-consumers.mjs",
+    "test:browser": "npm run build && playwright test",
+    "test:browser:project": "playwright test --project",
     "example": "npm run build && node scripts/serve-example.mjs",
-    "check": "npm run check:biome && npm run typecheck && npm test && npm run test:coverage && npm run build && npm run lint:package && npm run test:package",
+    "check": "npm run check:biome && npm run typecheck && npm test && npm run test:coverage && npm run build && npm run lint:package && npm run test:package && npm run test:consumers",
     "prepublishOnly": "npm run check"
   },
   "keywords": [
@@ -140,10 +143,12 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.5.13",
+    "@playwright/test": "^1.63.0",
     "@vitest/coverage-v8": "^5.0.0",
     "esbuild": "^0.28.2",
     "publint": "^0.3.24",
     "typescript": "^7.0.2",
+    "vite": "^8.3.0",
     "vitest": "^5.0.0"
   }
 }

@@ -77,6 +77,15 @@ npm run check
 
 `npm run check` runs Biome formatting and lint checks, strict typechecking, unit tests, 100% coverage checks, production builds, publint package validation, and installed-package compatibility tests for ESM, CommonJS, subpath imports, and the browser bundle.
 
+Run the real-browser suite in Chromium, Firefox, and WebKit:
+
+```sh
+npx playwright install
+npm run test:browser
+```
+
+CI also builds dedicated Node ESM, Node CommonJS, TypeScript NodeNext, TypeScript CommonJS, and Vite consumer fixtures. Release tags must exactly match the package version; a validated tag creates a GitHub release containing the npm tarball, browser bundle, and checksums.
+
 To explore the calculations interactively:
 
 ```sh

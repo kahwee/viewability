@@ -29,3 +29,14 @@ Before opening a pull request, run:
 npm run check
 npm audit --omit=dev
 ```
+
+Run `npm run test:browser` for changes that affect geometry, browser compatibility, the browser bundle, or the interactive example. GitHub Actions executes the suite independently in Chromium, Firefox, and WebKit.
+
+## Releases
+
+1. Update `package.json`, `package-lock.json`, and `CHANGELOG.md`.
+2. Run `npm run check` and `npm run test:browser`.
+3. Commit and push the release preparation.
+4. Create and push an annotated `v<package version>` tag.
+
+The release workflow rejects mismatched tags, repeats all checks, runs all three browser engines, and creates the GitHub release only after everything passes.
