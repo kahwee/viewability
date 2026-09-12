@@ -1,6 +1,10 @@
 ## Unreleased
 
-- Simplified repository guidance and documentation.
+## v1.4.2 - 2026-09-12
+
+- Adopted the native TypeScript compiler for faster typechecking and declarations.
+- Removed redundant editor configuration and duplicate test execution.
+- Clarified the package purpose, supported outputs, and repository guidance.
 
 ## v1.4.1 - 2026-09-12
 

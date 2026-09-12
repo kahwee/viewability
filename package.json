@@ -1,7 +1,7 @@
 {
   "name": "viewability",
-  "version": "1.4.1",
-  "description": "Returns how viewable an element is",
+  "version": "1.4.2",
+  "description": "Measure how much of a DOM element is visible in the viewport",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -100,7 +100,7 @@
   ],
   "scripts": {
     "clean": "node scripts/clean.mjs",
-    "build": "npm run clean && npm run build:modules && tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --minify --format=iife --global-name=viewability --outfile=dist/viewability.min.js && node scripts/create-cjs-wrappers.mjs",
+    "build": "npm run clean && npm run build:modules && tsgo -p tsconfig.build.json && esbuild src/index.ts --bundle --minify --format=iife --global-name=viewability --outfile=dist/viewability.min.js && node scripts/create-cjs-wrappers.mjs",
     "build:modules": "esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts src/measure.ts --bundle --sourcemap --target=es2018 --outdir=dist --format=esm && esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts src/measure.ts --bundle --sourcemap --target=es2018 --outdir=dist --format=cjs --out-extension:.js=.bundle.cjs",
     "format": "biome format --write .",
     "format:check": "biome format .",
@@ -108,7 +108,7 @@
     "lint:fix": "biome lint --write .",
     "lint:package": "publint",
     "check:biome": "biome check .",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "tsgo --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -116,7 +116,7 @@
     "test:consumers": "node scripts/test-consumers.mjs",
     "test:browser": "npm run build && playwright test",
     "example": "npm run build && node scripts/serve-example.mjs",
-    "check": "npm run check:biome && npm run typecheck && npm test && npm run test:coverage && npm run build && npm run lint:package && npm run test:package && npm run test:consumers",
+    "check": "npm run check:biome && npm run typecheck && npm run test:coverage && npm run build && npm run lint:package && npm run test:package && npm run test:consumers",
     "prepublishOnly": "npm run check"
   },
   "keywords": [
@@ -143,10 +143,10 @@
   "devDependencies": {
     "@biomejs/biome": "^2.5.13",
     "@playwright/test": "^1.63.0",
+    "@typescript/native-preview": "7.0.0-dev.20260707.2",
     "@vitest/coverage-v8": "^5.0.0",
     "esbuild": "^0.28.2",
     "publint": "^0.3.24",
-    "typescript": "^7.0.2",
     "vite": "^8.3.0",
     "vitest": "^5.0.0"
   }

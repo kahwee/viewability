@@ -1,6 +1,6 @@
 # viewability
 
-A zero-dependency browser library for synchronously measuring how much of an element is visible in the viewport.
+A tiny, zero-dependency browser library that synchronously measures how much of a DOM element is visible in the viewport.
 
 ## Install
 
@@ -35,7 +35,7 @@ const { measure } = require('viewability')
 const vertical = require('viewability/vertical')
 ```
 
-The package also includes TypeScript declarations and `dist/viewability.min.js` for script-tag usage. The browser build exposes a global `viewability` object.
+The package ships ESM, CommonJS, TypeScript declarations, focused subpath exports, and `dist/viewability.min.js` for script tags. The browser build exposes a global `viewability` object.
 
 ## API
 
@@ -56,7 +56,7 @@ npm run check
 npm run test:browser
 ```
 
-`npm run check` runs Biome, strict typechecking, unit coverage, builds, package validation, and ESM, CommonJS, TypeScript, and Vite consumer tests. Playwright covers Chromium, Firefox, and WebKit.
+`npm run check` runs Biome, native TypeScript (`tsgo`) checking, 100% unit coverage, builds, package validation, and ESM, CommonJS, TypeScript, and Vite consumer tests. Playwright covers Chromium, Firefox, and WebKit.
 
 Run `npm run example` to open the interactive playground at `http://localhost:4173`.
 
