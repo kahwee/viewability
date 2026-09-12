@@ -1,9 +1,14 @@
 import { describe, expect, it } from 'vitest'
-import { measureAxis, type AxisStates } from '../src/geometry.js'
+import { type AxisStates, measureAxis } from '../src/geometry.js'
 
 const states: AxisStates<string> = {
-  after: 'after', before: 'before', within: 'within', bothTruncated: 'both',
-  startTruncated: 'start', endTruncated: 'end', fallback: 'fallback',
+  after: 'after',
+  before: 'before',
+  within: 'within',
+  bothTruncated: 'both',
+  startTruncated: 'start',
+  endTruncated: 'end',
+  fallback: 'fallback',
 }
 
 describe('measureAxis', () => {

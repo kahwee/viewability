@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { mkdtemp, readFile, readdir, rm } from 'node:fs/promises'
+import { mkdtemp, readdir, readFile, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import vm from 'node:vm'
@@ -8,7 +8,9 @@ import vm from 'node:vm'
 const temporaryDirectory = await mkdtemp(join(tmpdir(), 'viewability-package-'))
 
 try {
-  execFileSync('npm', ['pack', '--ignore-scripts', '--pack-destination', temporaryDirectory], { stdio: 'pipe' })
+  execFileSync('npm', ['pack', '--ignore-scripts', '--pack-destination', temporaryDirectory], {
+    stdio: 'pipe',
+  })
   const archive = (await readdir(temporaryDirectory)).find((file) => file.endsWith('.tgz'))
   assert.ok(archive, 'npm pack did not create an archive')
 
@@ -17,19 +19,40 @@ try {
     stdio: 'pipe',
   })
 
-  execFileSync('node', ['--input-type=module', '--eval', `
+  execFileSync(
+    'node',
+    [
+      '--input-type=module',
+      '--eval',
+      `
     import viewability, { vertical } from 'viewability'
     import verticalDirect from 'viewability/vertical'
-    if (typeof viewability.measure !== 'function' || typeof vertical !== 'function' || typeof verticalDirect !== 'function') process.exit(1)
-  `], { cwd: temporaryDirectory, stdio: 'pipe' })
+    import verticalWithExtension from 'viewability/vertical.js'
+    import measure from 'viewability/measure'
+    if (typeof viewability.measure !== 'function' || typeof vertical !== 'function' || typeof verticalDirect !== 'function' || typeof verticalWithExtension !== 'function' || typeof measure !== 'function') process.exit(1)
+  `,
+    ],
+    { cwd: temporaryDirectory, stdio: 'pipe' },
+  )
 
-  execFileSync('node', ['--eval', `
+  execFileSync(
+    'node',
+    [
+      '--eval',
+      `
     const viewability = require('viewability')
     if (typeof viewability.vertical !== 'function') process.exit(1)
     if (typeof require('viewability/vertical') !== 'function') process.exit(1)
     if (typeof require('viewability/horizontal') !== 'function') process.exit(1)
     if (typeof require('viewability/isElementOnScreen') !== 'function') process.exit(1)
-  `], { cwd: temporaryDirectory, stdio: 'pipe' })
+    if (typeof require('viewability/vertical.js') !== 'function') process.exit(1)
+    if (typeof require('viewability/horizontal.js') !== 'function') process.exit(1)
+    if (typeof require('viewability/isElementOnScreen.js') !== 'function') process.exit(1)
+    if (typeof require('viewability/measure') !== 'function') process.exit(1)
+  `,
+    ],
+    { cwd: temporaryDirectory, stdio: 'pipe' },
+  )
 
   const packageRoot = join(temporaryDirectory, 'node_modules', 'viewability')
   const browserBundle = await readFile(join(packageRoot, 'dist', 'viewability.min.js'), 'utf8')

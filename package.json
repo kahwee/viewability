@@ -5,27 +5,90 @@
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/index.d.cts",
+  "unpkg": "./dist/viewability.min.js",
+  "jsdelivr": "./dist/viewability.min.js",
+  "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     },
     "./vertical": {
-      "types": "./dist/vertical.d.ts",
-      "import": "./dist/vertical.js",
-      "require": "./dist/vertical.cjs"
+      "import": {
+        "types": "./dist/vertical.d.ts",
+        "default": "./dist/vertical.js"
+      },
+      "require": {
+        "types": "./dist/vertical.d.cts",
+        "default": "./dist/vertical.cjs"
+      }
+    },
+    "./vertical.js": {
+      "import": {
+        "types": "./dist/vertical.d.ts",
+        "default": "./dist/vertical.js"
+      },
+      "require": {
+        "types": "./dist/vertical.d.cts",
+        "default": "./dist/vertical.cjs"
+      }
     },
     "./horizontal": {
-      "types": "./dist/horizontal.d.ts",
-      "import": "./dist/horizontal.js",
-      "require": "./dist/horizontal.cjs"
+      "import": {
+        "types": "./dist/horizontal.d.ts",
+        "default": "./dist/horizontal.js"
+      },
+      "require": {
+        "types": "./dist/horizontal.d.cts",
+        "default": "./dist/horizontal.cjs"
+      }
+    },
+    "./horizontal.js": {
+      "import": {
+        "types": "./dist/horizontal.d.ts",
+        "default": "./dist/horizontal.js"
+      },
+      "require": {
+        "types": "./dist/horizontal.d.cts",
+        "default": "./dist/horizontal.cjs"
+      }
     },
     "./isElementOnScreen": {
-      "types": "./dist/is-element-on-screen.d.ts",
-      "import": "./dist/is-element-on-screen.js",
-      "require": "./dist/is-element-on-screen.cjs"
+      "import": {
+        "types": "./dist/is-element-on-screen.d.ts",
+        "default": "./dist/is-element-on-screen.js"
+      },
+      "require": {
+        "types": "./dist/is-element-on-screen.d.cts",
+        "default": "./dist/is-element-on-screen.cjs"
+      }
+    },
+    "./isElementOnScreen.js": {
+      "import": {
+        "types": "./dist/is-element-on-screen.d.ts",
+        "default": "./dist/is-element-on-screen.js"
+      },
+      "require": {
+        "types": "./dist/is-element-on-screen.d.cts",
+        "default": "./dist/is-element-on-screen.cjs"
+      }
+    },
+    "./measure": {
+      "import": {
+        "types": "./dist/measure.d.ts",
+        "default": "./dist/measure.js"
+      },
+      "require": {
+        "types": "./dist/measure.d.cts",
+        "default": "./dist/measure.cjs"
+      }
     },
     "./package.json": "./package.json"
   },
@@ -38,14 +101,20 @@
   "scripts": {
     "clean": "node scripts/clean.mjs",
     "build": "npm run clean && npm run build:modules && tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --minify --format=iife --global-name=viewability --outfile=dist/viewability.min.js && node scripts/create-cjs-wrappers.mjs",
-    "build:modules": "esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts --bundle --sourcemap --target=es2020 --outdir=dist --format=esm && esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts --bundle --sourcemap --target=es2020 --outdir=dist --format=cjs --out-extension:.js=.bundle.cjs",
+    "build:modules": "esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts src/measure.ts --bundle --sourcemap --target=es2018 --outdir=dist --format=esm && esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts src/measure.ts --bundle --sourcemap --target=es2018 --outdir=dist --format=cjs --out-extension:.js=.bundle.cjs",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "lint:package": "publint",
+    "check:biome": "biome check .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:package": "node scripts/test-package.mjs",
     "example": "npm run build && node scripts/serve-example.mjs",
-    "check": "npm run typecheck && npm test && npm run test:coverage && npm run build && npm run test:package",
+    "check": "npm run check:biome && npm run typecheck && npm test && npm run test:coverage && npm run build && npm run lint:package && npm run test:package",
     "prepublishOnly": "npm run check"
   },
   "keywords": [
@@ -58,7 +127,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kahwee/viewability.git"
+    "url": "git+https://github.com/kahwee/viewability.git"
   },
   "bugs": {
     "url": "https://github.com/kahwee/viewability/issues"
@@ -70,8 +139,10 @@
     "node": ">=20"
   },
   "devDependencies": {
+    "@biomejs/biome": "^2.5.13",
     "@vitest/coverage-v8": "^5.0.0",
     "esbuild": "^0.28.2",
+    "publint": "^0.3.24",
     "typescript": "^7.0.2",
     "vitest": "^5.0.0"
   }

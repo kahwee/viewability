@@ -11,7 +11,14 @@ export function elementAt(rect: RectInput, onRead?: () => void): MeasurableEleme
   return {
     getBoundingClientRect() {
       onRead?.()
-      return { ...rect, width: rect.right - rect.left, height: rect.bottom - rect.top, x: rect.left, y: rect.top, toJSON: () => rect }
+      return {
+        ...rect,
+        width: rect.right - rect.left,
+        height: rect.bottom - rect.top,
+        x: rect.left,
+        y: rect.top,
+        toJSON: () => rect,
+      }
     },
   }
 }
