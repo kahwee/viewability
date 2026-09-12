@@ -1,3 +1,10 @@
+## Unreleased
+
+- Added Biome formatting and linting to local and CI verification.
+- Added CommonJS-specific declarations and restored historical `.js` subpath compatibility.
+- Added package metadata for tree shaking and CDN browser entry discovery.
+- Added a focused `viewability/measure` import and broadened browser output to ES2018.
+
 ## v1.4.0 - 2026-09-12
 
 - Reimplemented the package in strict TypeScript with shared axis geometry.

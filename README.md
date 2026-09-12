@@ -37,6 +37,7 @@ const viewability = require('viewability')
 const vertical = require('viewability/vertical')
 const horizontal = require('viewability/horizontal')
 const isElementOnScreen = require('viewability/isElementOnScreen')
+const measure = require('viewability/measure')
 ```
 
 For a script tag, use `dist/viewability.min.js` from the npm package or a CDN. It exposes `viewability` globally.
@@ -74,7 +75,7 @@ npm install
 npm run check
 ```
 
-`npm run check` performs strict typechecking, unit tests, 100% coverage checks, production builds, and installed-package compatibility tests for ESM, CommonJS, subpath imports, and the browser bundle.
+`npm run check` runs Biome formatting and lint checks, strict typechecking, unit tests, 100% coverage checks, production builds, publint package validation, and installed-package compatibility tests for ESM, CommonJS, subpath imports, and the browser bundle.
 
 To explore the calculations interactively:
 
