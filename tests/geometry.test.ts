@@ -22,4 +22,12 @@ describe('measureAxis', () => {
   it('retains the 1.x fallback for invalid numeric input', () => {
     expect(measureAxis(Number.NaN, 10, 100, states)).toEqual({ value: 0, state: 'fallback' })
   })
+
+  it.each([
+    [0, 0, { value: 0, state: 'before' }],
+    [100, 100, { value: 1, state: 'within' }],
+    [100, 101, { value: 0, state: 'end' }],
+  ])('preserves the 1.x boundary result for [%s, %s]', (start, end, expected) => {
+    expect(measureAxis(start, end, 100, states)).toEqual(expected)
+  })
 })

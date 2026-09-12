@@ -76,6 +76,14 @@ npm run check
 
 `npm run check` performs strict typechecking, unit tests, 100% coverage checks, production builds, and installed-package compatibility tests for ESM, CommonJS, subpath imports, and the browser bundle.
 
+To explore the calculations interactively:
+
+```sh
+npm run example
+```
+
+Then open `http://localhost:4173`. Move the target across the viewport boundaries and watch its horizontal, vertical, and visible-area measurements update.
+
 See [CONTRIBUTING.md](CONTRIBUTING.md) for project conventions.
 
 ## License

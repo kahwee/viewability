@@ -1,19 +1,40 @@
 {
   "name": "viewability",
-  "version": "1.3.4",
+  "version": "1.4.0",
   "description": "Returns how viewable an element is",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js", "require": "./dist/index.cjs" },
-    "./vertical": { "types": "./dist/vertical.d.ts", "import": "./dist/vertical.js", "require": "./dist/vertical.cjs" },
-    "./horizontal": { "types": "./dist/horizontal.d.ts", "import": "./dist/horizontal.js", "require": "./dist/horizontal.cjs" },
-    "./isElementOnScreen": { "types": "./dist/is-element-on-screen.d.ts", "import": "./dist/is-element-on-screen.js", "require": "./dist/is-element-on-screen.cjs" },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./vertical": {
+      "types": "./dist/vertical.d.ts",
+      "import": "./dist/vertical.js",
+      "require": "./dist/vertical.cjs"
+    },
+    "./horizontal": {
+      "types": "./dist/horizontal.d.ts",
+      "import": "./dist/horizontal.js",
+      "require": "./dist/horizontal.cjs"
+    },
+    "./isElementOnScreen": {
+      "types": "./dist/is-element-on-screen.d.ts",
+      "import": "./dist/is-element-on-screen.js",
+      "require": "./dist/is-element-on-screen.cjs"
+    },
     "./package.json": "./package.json"
   },
-  "files": ["dist", "README.md", "LICENSE", "CHANGELOG.md"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "scripts": {
     "clean": "node scripts/clean.mjs",
     "build": "npm run clean && npm run build:modules && tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --minify --format=iife --global-name=viewability --outfile=dist/viewability.min.js && node scripts/create-cjs-wrappers.mjs",
@@ -23,16 +44,31 @@
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:package": "node scripts/test-package.mjs",
+    "example": "npm run build && node scripts/serve-example.mjs",
     "check": "npm run typecheck && npm test && npm run test:coverage && npm run build && npm run test:package",
     "prepublishOnly": "npm run check"
   },
-  "keywords": ["viewable", "viewability", "advertising", "advertisement", "screen", "element"],
-  "repository": { "type": "git", "url": "https://github.com/kahwee/viewability.git" },
-  "bugs": { "url": "https://github.com/kahwee/viewability/issues" },
+  "keywords": [
+    "viewable",
+    "viewability",
+    "advertising",
+    "advertisement",
+    "screen",
+    "element"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kahwee/viewability.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kahwee/viewability/issues"
+  },
   "homepage": "https://github.com/kahwee/viewability",
   "author": "KahWee Teng <tengkahwee@gmail.com> (https://kw.sg/)",
   "license": "ISC",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "devDependencies": {
     "@vitest/coverage-v8": "^5.0.0",
     "esbuild": "^0.28.2",

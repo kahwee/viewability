@@ -36,6 +36,12 @@ try {
   const context = { window: { innerHeight: 100, innerWidth: 100 } }
   vm.runInNewContext(browserBundle, context)
   assert.equal(typeof context.viewability.vertical, 'function')
+  const result = context.viewability.measure({
+    getBoundingClientRect: () => ({ top: -10, bottom: 30, left: 50, right: 150 }),
+  })
+  assert.equal(result.value, 0.375)
+  assert.equal(result.vertical.state, 'EL_TOP_TRUNCATED')
+  assert.equal(result.horizontal.state, 'EL_RIGHT_TRUNCATED')
 } finally {
   await rm(temporaryDirectory, { recursive: true, force: true })
 }

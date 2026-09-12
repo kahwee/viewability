@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Viewability playground</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">viewability 1.4</p>
+        <h1>Viewport playground</h1>
+        <p>Move the target across the viewport edge to inspect its visible area in real time.</p>
+      </header>
+
+      <section class="controls" aria-label="Target position">
+        <label>Horizontal position <output id="x-output">92%</output><input id="x" type="range" min="0" max="100" value="92" /></label>
+        <label>Vertical position <output id="y-output">18%</output><input id="y" type="range" min="0" max="100" value="18" /></label>
+      </section>
+
+      <section class="stage" aria-label="Playground backdrop">
+        <p>The browser window is the measurement boundary.</p>
+        <div id="target"><span>target</span></div>
+      </section>
+
+      <section class="results" aria-live="polite">
+        <article><span>Visible area</span><strong id="area">100%</strong></article>
+        <article><span>Vertical</span><strong id="vertical">100%</strong><code id="vertical-state"></code></article>
+        <article><span>Horizontal</span><strong id="horizontal">100%</strong><code id="horizontal-state"></code></article>
+      </section>
+    </main>
+    <script src="/viewability.min.js"></script>
+    <script src="/example.js"></script>
+  </body>
+</html>
