@@ -1,3 +1,7 @@
+## Unreleased
+
+- Simplified repository guidance and documentation.
+
 ## v1.4.1 - 2026-09-12
 
 - Added Biome formatting and linting to local and CI verification.
@@ -13,7 +17,7 @@
 - Reimplemented the package in strict TypeScript with shared axis geometry.
 - Added a combined `measure` API that reads the element rectangle once.
 - Added ESM, CommonJS, browser, and TypeScript declaration builds.
-- Replaced Karma, Mocha, Babel, Webpack, and Travis with Vitest, tsup, esbuild, and GitHub Actions.
+- Replaced Karma, Mocha, Babel, Webpack, and Travis with Vitest, TypeScript, esbuild, and GitHub Actions.
 - Added full geometry coverage and installed-package compatibility tests.
 - Added an interactive viewport-measurement example.
 

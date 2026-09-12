@@ -115,7 +115,6 @@
     "test:package": "node scripts/test-package.mjs",
     "test:consumers": "node scripts/test-consumers.mjs",
     "test:browser": "npm run build && playwright test",
-    "test:browser:project": "playwright test --project",
     "example": "npm run build && node scripts/serve-example.mjs",
     "check": "npm run check:biome && npm run typecheck && npm test && npm run test:coverage && npm run build && npm run lint:package && npm run test:package && npm run test:consumers",
     "prepublishOnly": "npm run check"

@@ -1,6 +1,6 @@
 # viewability
 
-A small, zero-runtime-dependency library for synchronously measuring how much of an element intersects the browser viewport.
+A zero-dependency browser library for synchronously measuring how much of an element is visible in the viewport.
 
 ## Install
 
@@ -8,93 +8,59 @@ A small, zero-runtime-dependency library for synchronously measuring how much of
 npm install viewability
 ```
 
-The package includes ESM, CommonJS, TypeScript declarations, and a minified browser bundle.
-
-## Usage
+## Use
 
 ```ts
-import { horizontal, isElementOnScreen, measure, vertical } from 'viewability'
+import { isElementOnScreen, measure } from 'viewability'
 
-const element = document.querySelector('#example')!
+const element = document.querySelector('#target')!
+const result = measure(element)
 
-vertical(element)
-// { value: 1, state: 'EL_IS_WITHIN_VERTICAL_VIEW' }
-
-horizontal(element)
-// { value: 0.5, state: 'EL_RIGHT_TRUNCATED' }
-
-measure(element)
-// { value: 0.5, visible: true, fullyVisible: false, vertical: ..., horizontal: ... }
+result.value // visible area from 0 to 1
+result.visible // any area is visible
+result.fullyVisible // the entire element is visible
+result.vertical // vertical percentage and position state
+result.horizontal // horizontal percentage and position state
 
 isElementOnScreen(element) // any visible area
-isElementOnScreen(element, true) // fully visible on both axes
+isElementOnScreen(element, true) // fully visible
 ```
 
-CommonJS and focused subpath imports remain supported:
+Focused imports are available from `viewability/vertical`, `viewability/horizontal`, `viewability/isElementOnScreen`, and `viewability/measure`.
+
+CommonJS remains supported:
 
 ```js
-const viewability = require('viewability')
+const { measure } = require('viewability')
 const vertical = require('viewability/vertical')
-const horizontal = require('viewability/horizontal')
-const isElementOnScreen = require('viewability/isElementOnScreen')
-const measure = require('viewability/measure')
 ```
 
-For a script tag, use `dist/viewability.min.js` from the npm package or a CDN. It exposes `viewability` globally.
+The package also includes TypeScript declarations and `dist/viewability.min.js` for script-tag usage. The browser build exposes a global `viewability` object.
 
 ## API
 
-Every percentage is between `0` and `1`. A combined measurement multiplies the visible vertical and horizontal proportions, producing the visible area ratio.
+- `measure(element)` returns the combined visible-area ratio and both axis results.
+- `vertical(element)` returns `{ value, state }` for vertical visibility.
+- `horizontal(element)` returns `{ value, state }` for horizontal visibility.
+- `isElementOnScreen(element, full?)` returns a visibility boolean.
 
-### `vertical(element)`
+Each call reads `getBoundingClientRect()` once. Use `IntersectionObserver` instead when continuously observing many elements.
 
-Returns `{ value, state }` for the vertical axis. States describe whether the element is above, below, within, or truncated by the viewport.
+## Develop
 
-### `horizontal(element)`
-
-Returns `{ value, state }` for the horizontal axis. States describe whether the element is left, right, within, or truncated by the viewport.
-
-### `measure(element)`
-
-Reads the element rectangle once and returns the combined visible area plus both axis results.
-
-### `isElementOnScreen(element, full = false)`
-
-Returns `true` when any area is visible. Pass `true` to require complete visibility.
-
-## Choosing this library or `IntersectionObserver`
-
-Use `viewability` when you need an immediate synchronous answer, exact visible-area ratios, or the positional state. Use `IntersectionObserver` for continuous observation of many elements; it avoids repeatedly measuring layout in scroll handlers.
-
-## Development
-
-Requires Node.js 20 or newer.
+Node.js 20 or newer is required.
 
 ```sh
 npm install
 npm run check
-```
-
-`npm run check` runs Biome formatting and lint checks, strict typechecking, unit tests, 100% coverage checks, production builds, publint package validation, and installed-package compatibility tests for ESM, CommonJS, subpath imports, and the browser bundle.
-
-Run the real-browser suite in Chromium, Firefox, and WebKit:
-
-```sh
-npx playwright install
 npm run test:browser
 ```
 
-CI also builds dedicated Node ESM, Node CommonJS, TypeScript NodeNext, TypeScript CommonJS, and Vite consumer fixtures. Release tags must exactly match the package version; a validated tag creates a GitHub release containing the npm tarball, browser bundle, and checksums.
+`npm run check` runs Biome, strict typechecking, unit coverage, builds, package validation, and ESM, CommonJS, TypeScript, and Vite consumer tests. Playwright covers Chromium, Firefox, and WebKit.
 
-To explore the calculations interactively:
+Run `npm run example` to open the interactive playground at `http://localhost:4173`.
 
-```sh
-npm run example
-```
-
-Then open `http://localhost:4173`. Move the target across the viewport boundaries and watch its horizontal, vertical, and visible-area measurements update.
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for project conventions.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for conventions and the release process.
 
 ## License
 

@@ -1,8 +1,7 @@
-* text eol=lf
+* text=auto eol=lf
 
-*.png binary
+*.gif binary
+*.jpeg binary
 *.jpg binary
-*.min.js binary
-
-*.min.js merge=ours
-*.js.map merge=ours
+*.png binary
+*.webp binary
