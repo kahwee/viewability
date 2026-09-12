@@ -29,4 +29,17 @@ describe('public API', () => {
   ])('checks screen visibility', (rect, full, expected) => {
     expect(isElementOnScreen(elementAt(rect), full)).toBe(expected)
   })
+
+  it('reads the rectangle only once for a boolean check', () => {
+    const onRead = vi.fn()
+    isElementOnScreen(elementAt({ top: 0, bottom: 40, left: 0, right: 40 }, onRead))
+    expect(onRead).toHaveBeenCalledOnce()
+  })
+
+  it('uses the viewport dimensions at call time', () => {
+    const element = elementAt({ top: 60, bottom: 120, left: 60, right: 120 })
+    expect(measure(element).value).toBeCloseTo(4 / 9)
+    vi.stubGlobal('window', { innerHeight: 200, innerWidth: 200 })
+    expect(measure(element).value).toBe(1)
+  })
 })
