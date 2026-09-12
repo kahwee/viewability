@@ -1,9 +1,12 @@
-## Unreleased
+## v1.4.1 - 2026-09-12
 
 - Added Biome formatting and linting to local and CI verification.
 - Added CommonJS-specific declarations and restored historical `.js` subpath compatibility.
 - Added package metadata for tree shaking and CDN browser entry discovery.
 - Added a focused `viewability/measure` import and broadened browser output to ES2018.
+- Added Chromium, Firefox, and WebKit integration coverage for real DOM geometry.
+- Added Node ESM, Node CommonJS, TypeScript ESM, TypeScript CommonJS, and Vite consumer fixtures.
+- Added cached, parallel CI jobs and a tag-validated GitHub release workflow.
 
 ## v1.4.0 - 2026-09-12
 

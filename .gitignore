@@ -93,6 +93,8 @@ yarn-error.log
 *.map
 /coverage
 /dist
+/.playwright-report
+/test-results
 /docs
 _karma.xml
 .idea
