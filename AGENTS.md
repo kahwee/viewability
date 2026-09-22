@@ -4,7 +4,8 @@
 - Keep runtime dependencies at zero.
 - Read each element rectangle only once per public call.
 - Add tests for every behavior change.
-- Run `npm run check` and relevant Playwright tests before committing.
+- Run `npm run check` and relevant Playwright tests before committing. Install
+  browser binaries with `npx playwright install` when the local cache is empty.
 - Never commit `dist`, coverage, or Playwright output.
 - For greenkeeping, run `npm outdated` and `npm audit --omit=dev` first. Prefer
   compatible updates, commit `package-lock.json`, and keep the Node versions in

@@ -53,6 +53,7 @@ Node.js 20 or newer is required.
 ```sh
 npm install
 npm run check
+npx playwright install
 npm run test:browser
 ```
 
