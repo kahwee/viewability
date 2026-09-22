@@ -57,6 +57,10 @@ npx playwright install
 npm run test:browser
 ```
 
+On Linux, WebKit may also need system libraries. Use
+`npx playwright install --with-deps` on a supported host when Playwright reports
+missing libraries.
+
 `npm run check` runs Biome, native TypeScript (`tsgo`) checking, 100% unit coverage, builds, package validation, and ESM, CommonJS, TypeScript, and Vite consumer tests. Playwright covers Chromium, Firefox, and WebKit.
 
 Run `npm run example` to open the interactive playground at `http://localhost:4173`.
