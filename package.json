@@ -141,10 +141,10 @@
     "node": ">=20"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.5.13",
+    "@biomejs/biome": "^2.5.14",
     "@playwright/test": "^1.63.0",
     "@typescript/native-preview": "7.0.0-dev.20260707.2",
-    "@vitest/coverage-v8": "^5.0.0",
+    "@vitest/coverage-v8": "^5.0.1",
     "esbuild": "^0.28.2",
     "publint": "^0.3.24",
     "vite": "^8.3.0",
