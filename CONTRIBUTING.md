@@ -5,7 +5,7 @@
 Use Node.js 20 or newer:
 
 ```sh
-npm install
+npm ci
 npm run check
 ```
 
@@ -31,6 +31,11 @@ npm audit --omit=dev
 ```
 
 Run `npm run test:browser` for changes that affect geometry, browser compatibility, the browser bundle, or the interactive example. GitHub Actions executes the suite independently in Chromium, Firefox, and WebKit.
+
+For dependency maintenance, inspect `npm outdated` and the audit before updating.
+Keep Vitest and its coverage package aligned, preserve the declared Node runtime
+range, and commit the lockfile. Package examples should describe viewport geometry
+without promising occlusion detection or proof that a person saw the element.
 
 ## Releases
 

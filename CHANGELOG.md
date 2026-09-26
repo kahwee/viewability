@@ -1,4 +1,8 @@
-## Unreleased
+## 1.4.3 (unreleased)
+
+- Refresh Vite to 8.3.1 and Vitest/V8 coverage to 5.0.2.
+- Clarify viewport geometry boundaries and demonstrate guarded DOM access.
+
 
 ## v1.4.2 - 2026-09-12
 
