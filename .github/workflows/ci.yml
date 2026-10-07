@@ -52,6 +52,7 @@ jobs:
 
   node-compatibility:
     name: Node.js ${{ matrix.node-version }} consumers
+    needs: quality
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -67,8 +68,12 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Build and test consumers
-        run: npm run build && npm run test:consumers
+      - name: Download shared package build
+        uses: actions/download-artifact@v8.0.1
+        with:
+          name: package-build
+      - name: Test consumers
+        run: npm run test:consumers
 
   browser:
     name: Playwright ${{ matrix.browser }}

@@ -1,5 +1,7 @@
 ## 1.4.3 (unreleased)
 
+- Update compatible development tooling and refresh dependency security fixes.
+
 - Refresh Vite to 8.3.1 and Vitest/V8 coverage to 5.0.2.
 - Clarify viewport geometry boundaries and demonstrate guarded DOM access.
 
