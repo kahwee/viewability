@@ -90,3 +90,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for conventions and the release process.
 ## License
 
 ISC
+
+## CI maintenance
+
+[GitHub Actions maintenance](.github/ACTIONS.md) covers workflows, parallel checks, action versions, and weekly updates.
