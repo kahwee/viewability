@@ -27,10 +27,18 @@ jobs:
         run: node scripts/validate-release-tag.mjs "$GITHUB_REF_NAME"
       - name: Install dependencies
         run: npm ci
-      - name: Verify source, package, and consumers
-        run: npm run check
-      - name: Audit production dependencies
-        run: npm audit --omit=dev
+      # Source checks and audit are independent of the package build.
+      - parallel:
+          - name: Check code style
+            run: npm run check:biome
+          - name: Type check
+            run: npm run typecheck
+          - name: Tests with coverage
+            run: npm run test:coverage
+          - name: Audit production dependencies
+            run: npm audit --omit=dev
+      - name: Build and verify package and consumers
+        run: npm run build && npm run lint:package && npm run test:package && npm run test:consumers
       - name: Cache Playwright browsers
         id: playwright-cache
         uses: actions/cache@v6.1.0
