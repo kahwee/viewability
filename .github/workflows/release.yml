@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Test immutable release asset recovery
-        run: python3 scripts/test_release_assets.py
+        run: python3 scripts/test_release_assets.py -v
 
       - name: Check out tagged source
         uses: actions/checkout@v7.0.1

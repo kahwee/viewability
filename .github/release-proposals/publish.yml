@@ -1,16 +1,15 @@
 # PROPOSAL ONLY. Move to .github/workflows/publish.yml only after access approval.
 name: Publish npm package
 on:
-  release:
-    types: [published]
+  push:
+    tags: ["v*"]
 permissions:
   contents: read
 concurrency:
-  group: npm-release-${{ github.event.release.tag_name }}
+  group: npm-release-${{ github.ref_name }}
   cancel-in-progress: false
 jobs:
   publish:
-    if: ${{ !github.event.release.prerelease }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     permissions:
@@ -20,14 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
         with:
-          ref: ${{ github.event.release.tag_name }}
+          ref: ${{ github.ref_name }}
       - uses: actions/setup-node@v7.1.0
         with:
           node-version: 26
       - name: Validate metadata and registry state
         id: metadata
         env:
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          RELEASE_TAG: ${{ github.ref_name }}
         run: |
           node --test scripts/check-release-guard.mjs
           node scripts/release-check.mjs "$RELEASE_TAG" --registry
@@ -42,15 +41,20 @@ jobs:
       - name: Check and build
         run: npm run check
       - name: Pack the checked output
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
         run: |
           mkdir -p "$RUNNER_TEMP/release"
           npm pack --ignore-scripts --pack-destination "$RUNNER_TEMP/release"
+          node scripts/release-check.mjs "$RELEASE_TAG"
           tar -tzf "$RUNNER_TEMP"/release/*.tgz
+          tar -xOf "$RUNNER_TEMP"/release/*.tgz package/package.json > "$RUNNER_TEMP/packed-package.json"
+          node --input-type=module -e 'import { readFileSync } from "node:fs"; const source = JSON.parse(readFileSync("package.json")); const packed = JSON.parse(readFileSync(process.env.RUNNER_TEMP + "/packed-package.json")); if (packed.name !== source.name || packed.version !== source.version || packed.private) throw new Error("Packed package identity differs from checked source")'
       - name: Publish checked tarball with npm OIDC
         if: steps.metadata.outputs.should_publish == 'true'
         working-directory: ${{ runner.temp }}
         env:
-          PRERELEASE: ${{ github.event.release.prerelease }}
+          PRERELEASE: "false"
         run: |
           node -e 'const v=process.argv[1].split(".").map(Number); if(v[0]<11 || (v[0]===11 && (v[1]<5 || (v[1]===5 && v[2]<1)))) throw new Error("npm >=11.5.1 required")' "$(npm --version)"
           dist_tag=latest
