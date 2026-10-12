@@ -18,6 +18,9 @@ jobs:
     steps:
       - name: Check out tagged source
         uses: actions/checkout@v7.0.1
+      - name: Test immutable release asset recovery
+        run: python3 scripts/test_release_assets.py -v
+
       - name: Set up Node.js
         uses: actions/setup-node@v7.0.0
         with:
@@ -62,8 +65,4 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          if gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1; then
-            gh release upload "$GITHUB_REF_NAME" release/* --clobber
-          else
-            gh release create "$GITHUB_REF_NAME" release/* --verify-tag --generate-notes --title "viewability $GITHUB_REF_NAME"
-          fi
+          python3 scripts/release-assets.py "$GITHUB_REF_NAME" release --generate-notes --title "viewability $GITHUB_REF_NAME"
