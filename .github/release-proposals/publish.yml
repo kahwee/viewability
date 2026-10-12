@@ -19,6 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.1
         with:
+          fetch-depth: 0
           ref: ${{ github.ref_name }}
       - uses: actions/setup-node@v7.1.0
         with:
@@ -35,8 +36,10 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           source_sha="$(git rev-parse HEAD)"
+          test "$source_sha" = "$GITHUB_SHA"
+          git merge-base --is-ancestor "$source_sha" "origin/master"
           gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$source_sha&per_page=100" > "$RUNNER_TEMP/ci.json"
-          jq -e --arg sha "$source_sha" '[.workflow_runs[] | select(.head_sha == $sha and .conclusion == "success" and (.event == "push" or .event == "pull_request"))] | length > 0' "$RUNNER_TEMP/ci.json"
+          jq -e --arg sha "$source_sha" '[.workflow_runs[] | select(.head_sha == $sha and .conclusion == "success" and .event == "push" and .head_branch == "master")] | length > 0' "$RUNNER_TEMP/ci.json"
       - run: npm ci
       - name: Check and build
         run: npm run check
