@@ -1,0 +1,58 @@
+# PROPOSAL ONLY. Move to .github/workflows/publish.yml only after access approval.
+name: Publish npm package
+on:
+  release:
+    types: [published]
+permissions:
+  contents: read
+concurrency:
+  group: npm-release-${{ github.event.release.tag_name }}
+  cancel-in-progress: false
+jobs:
+  publish:
+    if: ${{ !github.event.release.prerelease }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          ref: ${{ github.event.release.tag_name }}
+      - uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 26
+      - name: Validate metadata and registry state
+        id: metadata
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+        run: |
+          node --test scripts/release-check.test.mjs
+          node scripts/release-check.mjs "$RELEASE_TAG" --registry
+      - name: Require successful CI on this exact source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          source_sha="$(git rev-parse HEAD)"
+          gh api "repos/$GITHUB_REPOSITORY/actions/workflows/ci.yml/runs?head_sha=$source_sha&per_page=100" > "$RUNNER_TEMP/ci.json"
+          jq -e --arg sha "$source_sha" '[.workflow_runs[] | select(.head_sha == $sha and .conclusion == "success" and (.event == "push" or .event == "pull_request"))] | length > 0' "$RUNNER_TEMP/ci.json"
+      - run: npm ci
+      - name: Check and build
+        run: npm run check
+      - name: Pack the checked output
+        run: |
+          mkdir -p "$RUNNER_TEMP/release"
+          npm pack --ignore-scripts --pack-destination "$RUNNER_TEMP/release"
+          tar -tzf "$RUNNER_TEMP"/release/*.tgz
+      - name: Publish checked tarball with npm OIDC
+        if: steps.metadata.outputs.should_publish == 'true'
+        working-directory: ${{ runner.temp }}
+        env:
+          PRERELEASE: ${{ github.event.release.prerelease }}
+        run: |
+          node -e 'const v=process.argv[1].split(".").map(Number); if(v[0]<11 || (v[0]===11 && (v[1]<5 || (v[1]===5 && v[2]<1)))) throw new Error("npm >=11.5.1 required")' "$(npm --version)"
+          dist_tag=latest
+          if [ "$PRERELEASE" = true ]; then dist_tag=next; fi
+          npm publish "$RUNNER_TEMP"/release/*.tgz --ignore-scripts --access public --tag "$dist_tag"
