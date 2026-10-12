@@ -4,7 +4,7 @@ The release guard validates stable `v<package.json version>` tags, refuses priva
 packages and mismatched npm lock metadata, and stops on registry errors. A 200
 response means the version is immutable; it never forces another upload.
 
-Run `node --test scripts/release-check.test.mjs` and
+Run `node --test scripts/check-release-guard.mjs` and
 `node scripts/release-check.mjs v<version>` without publishing.
 `--registry` adds a read-only check of the exact public npm version.
 

@@ -20,7 +20,7 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v7.0.1
       - name: Test release metadata guard
-        run: node --test scripts/release-check.test.mjs
+        run: node --test scripts/check-release-guard.mjs
 
       - name: Set up Node.js
         uses: actions/setup-node@v7.0.0
