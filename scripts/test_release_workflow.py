@@ -38,10 +38,16 @@ class ReleaseLayoutTests(unittest.TestCase):
         check_release_order(self.source)
 
     def test_original_before_checkout_regression_is_rejected(self):
-        checkout = "      - name: Check out tagged source\n        uses: actions/checkout@v7.0.1\n"
-        recovery = "      - name: Test immutable release asset recovery\n        run: python3 scripts/test_release_assets.py -v\n\n"
-        self.assertIn(checkout + recovery, self.source)
-        regressed = self.source.replace(checkout + recovery, recovery + checkout)
+        # Derive blocks from the real file so action-version or display-name
+        # updates do not invalidate the regression fixture.
+        starts = [match.start() for match in re.finditer(r"(?m)^      - ", self.source)]
+        blocks = [self.source[start:end] for start, end in
+                  zip(starts, starts[1:] + [len(self.source)])]
+        checkout = next(block for block in blocks if "actions/checkout@" in block)
+        recovery = next(block for block in blocks
+                        if "python3 scripts/test_release_assets.py" in block)
+        regressed = self.source.replace(recovery, "", 1)
+        regressed = regressed.replace(checkout, recovery + checkout, 1)
         with self.assertRaisesRegex(AssertionError, "before checkout"):
             check_release_order(regressed)
 
