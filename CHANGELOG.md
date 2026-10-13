@@ -1,3 +1,8 @@
+## 1.4.4 (unreleased)
+
+- Update Playwright to 1.64.0, Vite to 8.3.4, and aligned Vitest/V8 coverage to 5.0.4.
+- Refresh compatible locked development dependencies while retaining the pinned native TypeScript compiler.
+
 ## 1.4.3 (unreleased)
 
 - Update compatible development tooling and refresh dependency security fixes.
