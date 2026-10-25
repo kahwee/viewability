@@ -17,6 +17,14 @@ export function measureAxis<State extends string>(
   viewportSize: number,
   states: AxisStates<State>,
 ): ViewabilityResult<State> {
+  if (
+    !Number.isFinite(start) ||
+    !Number.isFinite(end) ||
+    !Number.isFinite(viewportSize) ||
+    end < start
+  ) {
+    return { value: 0, state: states.fallback }
+  }
   const elementSize = end - start
 
   if (start > viewportSize) return { value: 0, state: states.after }
@@ -28,9 +36,5 @@ export function measureAxis<State extends string>(
   if (start < 0 && end <= viewportSize) {
     return { value: end / elementSize, state: states.startTruncated }
   }
-  if (start >= 0 && end > viewportSize) {
-    return { value: (viewportSize - start) / elementSize, state: states.endTruncated }
-  }
-
-  return { value: 0, state: states.fallback }
+  return { value: (viewportSize - start) / elementSize, state: states.endTruncated }
 }

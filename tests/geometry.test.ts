@@ -29,6 +29,15 @@ describe('measureAxis', () => {
   })
 
   it.each([
+    [0, Number.POSITIVE_INFINITY, 100],
+    [Number.NEGATIVE_INFINITY, 20, 100],
+    [0, 20, Number.POSITIVE_INFINITY],
+    [60, 40, 100],
+  ])('returns the fallback for invalid geometry [%s, %s] in %s', (start, end, size) => {
+    expect(measureAxis(start, end, size, states)).toEqual({ value: 0, state: 'fallback' })
+  })
+
+  it.each([
     [0, 0, { value: 0, state: 'before' }],
     [100, 100, { value: 1, state: 'within' }],
     [100, 101, { value: 0, state: 'end' }],
