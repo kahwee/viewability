@@ -92,6 +92,82 @@ test('returns zero for display-none elements', async ({ page }) => {
   expect(result.vertical.state).toBe('EL_IS_ABOVE_VIEW')
 })
 
+test('uses an iframe viewport and follows resize and document adoption', async ({ page }) => {
+  const results = await page.evaluate(async () => {
+    const frame = document.createElement('iframe')
+    frame.style.cssText = 'position:fixed;left:10px;top:10px;width:200px;height:100px;border:0'
+    frame.srcdoc =
+      '<div id="target" style="position:fixed;left:150px;top:75px;width:100px;height:50px"></div>'
+    const loaded = new Promise<void>((resolve) => {
+      frame.onload = () => resolve()
+    })
+    document.body.append(frame)
+    await loaded
+    const element = frame.contentDocument?.querySelector('#target')
+    if (!element) throw new Error('Missing iframe target')
+    const api = (
+      window as typeof window & {
+        viewability: {
+          measure(element: Element): BrowserMeasurement
+          vertical(element: Element): BrowserMeasurement['vertical']
+          horizontal(element: Element): BrowserMeasurement['horizontal']
+          isElementOnScreen(element: Element, full?: boolean): boolean
+        }
+      }
+    ).viewability
+    try {
+      let reads = 0
+      const originalRect = element.getBoundingClientRect.bind(element)
+      element.getBoundingClientRect = () => {
+        reads += 1
+        return originalRect()
+      }
+      const initial = api.measure(element)
+      const vertical = api.vertical(element)
+      const horizontal = api.horizontal(element)
+      const visible = api.isElementOnScreen(element)
+      const fullyVisible = api.isElementOnScreen(element, true)
+      const initialReads = reads
+
+      frame.style.width = '400px'
+      frame.style.height = '200px'
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+      const resized = api.measure(element)
+
+      frame.style.width = '100px'
+      frame.style.height = '50px'
+      await new Promise<void>((resolve) => requestAnimationFrame(() => resolve()))
+      const beforeAdoption = api.measure(element)
+      document.body.append(element)
+      const adopted = api.measure(element)
+      return {
+        initial,
+        vertical,
+        horizontal,
+        visible,
+        fullyVisible,
+        initialReads,
+        resized,
+        beforeAdoption,
+        adopted,
+      }
+    } finally {
+      element.remove()
+      frame.remove()
+    }
+  })
+
+  expect(results.initial).toMatchObject({ value: 0.25, visible: true, fullyVisible: false })
+  expect(results.vertical).toEqual({ value: 0.5, state: 'EL_BOTTOM_TRUNCATED' })
+  expect(results.horizontal).toEqual({ value: 0.5, state: 'EL_RIGHT_TRUNCATED' })
+  expect(results.visible).toBe(true)
+  expect(results.fullyVisible).toBe(false)
+  expect(results.initialReads).toBe(5)
+  expect(results.resized.value).toBe(1)
+  expect(results.beforeAdoption.value).toBe(0)
+  expect(results.adopted.value).toBe(1)
+})
+
 test('keeps the interactive example in sync at viewport boundaries', async ({ page }) => {
   const x = page.locator('#x')
   const y = page.locator('#y')

@@ -41,6 +41,13 @@ The package ships ESM, CommonJS, TypeScript declarations, focused subpath export
 
 Each call reads `getBoundingClientRect()` once. Use `IntersectionObserver` instead when continuously observing many elements.
 
+DOM elements are measured against their owning document's current viewport, so
+elements in a same-origin iframe use that frame's dimensions even when measured
+from its parent window. Resizing or adopting an element into another document is
+reflected on the next call. This does not measure clipping or visibility of the
+iframe itself in its parent. Rectangle-only objects, or documents without an
+associated window, retain the calling window's viewport as a fallback.
+
 For example, an element with half its width and all its height in the viewport
 has a visible-area ratio of `0.5`. Use that ratio for a geometry threshold:
 

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import horizontal from '../src/horizontal.js'
+import horizontal, { measureHorizontalRect } from '../src/horizontal.js'
 import { elementAt } from './helpers.js'
 
 describe('horizontal', () => {
@@ -20,5 +20,9 @@ describe('horizontal', () => {
     const onRead = vi.fn()
     horizontal(elementAt({ top: 0, bottom: 40, left: 0, right: 40 }, onRead))
     expect(onRead).toHaveBeenCalledOnce()
+  })
+
+  it('retains the direct rectangle helper and its global viewport', () => {
+    expect(measureHorizontalRect(75, 125)).toEqual({ value: 0.5, state: 'EL_RIGHT_TRUNCATED' })
   })
 })

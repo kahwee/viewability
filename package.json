@@ -101,7 +101,7 @@
   ],
   "scripts": {
     "clean": "node scripts/clean.mjs",
-    "build": "npm run clean && npm run build:modules && tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --minify --format=iife --global-name=viewability --outfile=dist/viewability.min.js && node scripts/create-cjs-wrappers.mjs",
+    "build": "npm run clean && npm run build:modules && tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --minify --target=es2018 --format=iife --global-name=viewability --outfile=dist/viewability.min.js && node scripts/create-cjs-wrappers.mjs",
     "build:modules": "esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts src/measure.ts --bundle --sourcemap --target=es2018 --outdir=dist --format=esm && esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts src/measure.ts --bundle --sourcemap --target=es2018 --outdir=dist --format=cjs --out-extension:.js=.bundle.cjs",
     "format": "biome format --write .",
     "format:check": "biome format .",

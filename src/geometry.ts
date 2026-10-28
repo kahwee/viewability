@@ -1,4 +1,40 @@
-import type { ViewabilityResult } from './types.js'
+import type { HorizontalState, VerticalState, ViewabilityResult } from './types.js'
+
+const horizontalStates = {
+  after: 'EL_IS_TOO_RIGHT',
+  before: 'EL_IS_TOO_LEFT',
+  within: 'EL_IS_WITHIN_HORIZONTAL_VIEW',
+  bothTruncated: 'EL_LEFT_AND_RIGHT_TRUNCATED',
+  startTruncated: 'EL_LEFT_TRUNCATED',
+  endTruncated: 'EL_RIGHT_TRUNCATED',
+  fallback: 'EL_IS_NOT_WITHIN_VIEW',
+} as const
+
+const verticalStates = {
+  after: 'EL_IS_BELOW_VIEW',
+  before: 'EL_IS_ABOVE_VIEW',
+  within: 'EL_IS_WITHIN_VERTICAL_VIEW',
+  bothTruncated: 'EL_BOTTOM_AND_TOP_TRUNCATED',
+  startTruncated: 'EL_TOP_TRUNCATED',
+  endTruncated: 'EL_BOTTOM_TRUNCATED',
+  fallback: 'EL_IS_NOT_WITHIN_VIEW',
+} as const
+
+export function horizontalInViewport(
+  left: number,
+  right: number,
+  width: number,
+): ViewabilityResult<HorizontalState> {
+  return measureAxis(left, right, width, horizontalStates)
+}
+
+export function verticalInViewport(
+  top: number,
+  bottom: number,
+  height: number,
+): ViewabilityResult<VerticalState> {
+  return measureAxis(top, bottom, height, verticalStates)
+}
 
 export interface AxisStates<State extends string> {
   after: State

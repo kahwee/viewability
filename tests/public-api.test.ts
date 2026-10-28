@@ -42,4 +42,64 @@ describe('public API', () => {
     vi.stubGlobal('window', { innerHeight: 200, innerWidth: 200 })
     expect(measure(element).value).toBe(1)
   })
+
+  it('uses the owning document viewport for every public API', () => {
+    const onRead = vi.fn()
+    const element = {
+      ...elementAt({ top: 75, bottom: 125, left: 150, right: 250 }, onRead),
+      ownerDocument: { defaultView: { innerHeight: 100, innerWidth: 200 } },
+    }
+    vi.stubGlobal('window', { innerHeight: 600, innerWidth: 800 })
+
+    expect(measure(element)).toEqual({
+      value: 0.25,
+      visible: true,
+      fullyVisible: false,
+      vertical: { value: 0.5, state: 'EL_BOTTOM_TRUNCATED' },
+      horizontal: { value: 0.5, state: 'EL_RIGHT_TRUNCATED' },
+    })
+    expect(onRead).toHaveBeenCalledTimes(1)
+    expect(vertical(element)).toEqual({ value: 0.5, state: 'EL_BOTTOM_TRUNCATED' })
+    expect(horizontal(element)).toEqual({ value: 0.5, state: 'EL_RIGHT_TRUNCATED' })
+    expect(isElementOnScreen(element)).toBe(true)
+    expect(isElementOnScreen(element, true)).toBe(false)
+    expect(onRead).toHaveBeenCalledTimes(5)
+  })
+
+  it('reads the current owner viewport after resizing or adoption', () => {
+    const viewport = { innerHeight: 100, innerWidth: 100 }
+    const element = {
+      ...elementAt({ top: 60, bottom: 120, left: 60, right: 120 }),
+      ownerDocument: { defaultView: viewport },
+    }
+    vi.stubGlobal('window', { innerHeight: 400, innerWidth: 400 })
+    expect(measure(element).value).toBeCloseTo(4 / 9)
+    viewport.innerHeight = 200
+    viewport.innerWidth = 200
+    expect(measure(element).value).toBe(1)
+    element.ownerDocument = { defaultView: { innerHeight: 50, innerWidth: 50 } }
+    expect(measure(element).value).toBe(0)
+  })
+
+  it.each([undefined, null, { defaultView: null }])(
+    'keeps the global viewport fallback without an associated window: %s',
+    (ownerDocument) => {
+      const element = {
+        ...elementAt({ top: 60, bottom: 120, left: 60, right: 120 }),
+        ownerDocument,
+      }
+      expect(measure(element).value).toBeCloseTo(4 / 9)
+    },
+  )
+
+  it('does not require a global window when the element has its own viewport', () => {
+    vi.stubGlobal('window', undefined)
+    const element = {
+      ...elementAt({ top: 0, bottom: 40, left: 0, right: 40 }),
+      ownerDocument: { defaultView: { innerHeight: 100, innerWidth: 100 } },
+    }
+    expect(measure(element).value).toBe(1)
+    expect(vertical(element).value).toBe(1)
+    expect(horizontal(element).value).toBe(1)
+  })
 })

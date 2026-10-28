@@ -1,5 +1,8 @@
 ## 1.4.4 (unreleased)
 
+- Measure DOM elements against their owning document's viewport, fixing false visibility results for same-origin iframe content while preserving rectangle-only inputs and the 1.x boundary states.
+- Explicitly target ES2018 in the script-tag bundle as well as the ESM/CommonJS builds.
+- Cover iframe resizing and document adoption in Chromium, Firefox, and WebKit regression tests; retain one rectangle read per public call.
 - Update Biome to 2.6.3 and align Vitest/V8 coverage on 5.0.5; retain Playwright 1.64.1 and Vite 8.3.5.
 - Pin current stable GitHub Actions to immutable commits and keep independent checks parallel.
 - Shorten the README, retain detailed API examples, and distinguish the development runtime from Node.js 20 consumer support.
