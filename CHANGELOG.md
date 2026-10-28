@@ -1,3 +1,8 @@
+## 2.0.0 (unreleased candidate)
+
+- Require Node.js 20+ for consumers and ES2018-capable browsers or bundlers. Package exports encapsulate internal paths; see the [migration guide](docs/migration.md).
+- Preserve the documented root, axis helpers, `isElementOnScreen`, and historical `.js` aliases; add ESM, types, and `measure`. Elements in iframes use their owning viewport.
+
 ## 1.4.4 (unreleased)
 
 - Measure DOM elements against their owning document's viewport, fixing false visibility results for same-origin iframe content while preserving rectangle-only inputs and the 1.x boundary states.

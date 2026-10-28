@@ -21,7 +21,8 @@ if (element) {
 Call after the element mounts. Measurements describe viewport geometry, not
 occlusion, ancestor clipping, opacity, or proof that a person saw the element.
 Each call reads the element rectangle once. See [API and examples](docs/api.md)
-for axis helpers, CommonJS, focused imports, and browser-script usage.
+for axis helpers, CommonJS, focused imports, and browser-script usage. See the
+[2.0 migration guide](docs/migration.md) when upgrading from npm 1.3.4.
 
 ## Develop
 

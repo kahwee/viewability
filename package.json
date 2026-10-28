@@ -1,6 +1,6 @@
 {
   "name": "viewability",
-  "version": "1.4.4",
+  "version": "2.0.0",
   "description": "Measure how much of a DOM element is visible in the viewport",
   "type": "module",
   "main": "./dist/index.cjs",
@@ -96,6 +96,7 @@
     "dist",
     "README.md",
     "docs/api.md",
+    "docs/migration.md",
     "LICENSE",
     "CHANGELOG.md"
   ],
