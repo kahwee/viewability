@@ -1,43 +1,38 @@
-# GitHub Actions maintenance
+# GitHub Actions
 
-This guide describes the checked-in workflows. Follow each linked YAML file for branch filters, job dependencies, permissions, and release conditions.
+## Verification
 
-## Workflows
+[`ci.yml`](workflows/ci.yml) runs on `master` pushes and pull requests. The quality
+job uses Node.js 24 and frozen `npm ci`. Style, types, coverage, and production
+audit run in parallel; builds, package checks, consumer tests, and packing follow.
 
-| Workflow | Events | Jobs |
+The checked build is shared with Node.js 20/22 consumer jobs and independent
+Chromium, Firefox, and WebKit jobs. Preserve artifact names, `needs`, browser
+system dependencies, and failure-report uploads. Do not race writes to `dist`.
+Verification has read-only contents access and cancels superseded runs.
+
+## Stable immutable pins
+
+| Action | Release | Commit |
 | --- | --- | --- |
-| [ci.yml](workflows/ci.yml) | `push`, `pull_request` | `quality`, `node-compatibility`, `browser` |
-| [release.yml](workflows/release.yml) | `push` | `release` |
+| [actions/checkout](https://github.com/actions/checkout/releases/tag/v7.0.1) | v7.0.1 | `3d3c42e5aac5ba805825da76410c181273ba90b1` |
+| [actions/setup-node](https://github.com/actions/setup-node/releases/tag/v7.1.0) | v7.1.0 | `949feb2413d6458794dcd2491c4babbbce0c15c1` |
+| [actions/upload-artifact](https://github.com/actions/upload-artifact/releases/tag/v7.0.2) | v7.0.2 | `cf430e030ddbb5b0abf93d22962f4752f3646cd9` |
+| [actions/download-artifact](https://github.com/actions/download-artifact/releases/tag/v8.0.2) | v8.0.2 | `9000827ccba6bdab643e8b6fd33ac0654aef8333` |
+| [actions/cache](https://github.com/actions/cache/releases/tag/v6.1.0) | v6.1.0 | `55cc8345863c7cc4c66a329aec7e433d2d1c52a9` |
 
-## Parallel steps
+[Dependabot](dependabot.yml) checks Actions weekly. Verify release commits and
+runner requirements, retain version comments and permissions, and read back
+checks for the exact pushed SHA. No action version upgrade was needed in this
+refresh; existing latest-version tags became immutable pins.
 
-Independent checks use GitHub Actions [native parallel steps](https://github.blog/changelog/2026-06-25-actions-steps-can-now-be-run-in-parallel/). The following groups run concurrently within a job:
+## Release boundary
 
-- [ci.yml](workflows/ci.yml), job `quality`: `Check code style`; `Type check`; `Tests with coverage`; `Audit production dependencies`.
-- [release.yml](workflows/release.yml), job `release`: `Check code style`; `Type check`; `Tests with coverage`; `Audit production dependencies`.
+[`release.yml`](workflows/release.yml) runs on `v*` tags, validates the version,
+repeats source/package/browser gates, and creates immutable GitHub release
+artifacts. Its existing contents-write permission and recovery guards are
+unchanged. This workflow does not publish to npm.
 
-Steps after a group wait for it to finish. Keep prerequisites before the group and dependent build, package, or deployment work afterward. Do not run commands that overwrite the same build directory or coverage output together. Parallel steps share the job workspace; they do not provide separate machines.
-
-## Action versions
-
-Versions below match the current workflow and composite-action references. SHA-pinned actions remain pinned; compare their commit with the upstream stable release when updating.
-
-| Action | Reference |
-| --- | --- |
-| [actions/cache](https://github.com/actions/cache) | `v6.1.0` |
-| [actions/checkout](https://github.com/actions/checkout) | `v7.0.1` |
-| [actions/download-artifact](https://github.com/actions/download-artifact) | `v8.0.1` |
-| [actions/setup-node](https://github.com/actions/setup-node) | `v7.0.0` |
-| [actions/upload-artifact](https://github.com/actions/upload-artifact) | `v7.0.1` |
-
-## Greenkeeping
-
-[Dependabot configuration](dependabot.yml) checks GitHub Actions weekly and groups their updates. Review the upstream release notes, runtime requirements, permissions, and changes to inputs or artifact behavior before merging. Update SHA pins to the release commit, retaining the version comment where present.
-
-1. Update every reference to the affected action, including local composite actions under `.github/actions/`.
-2. Keep frozen dependency installation and the repository’s declared toolchain versions aligned. Cache package downloads with a lockfile-based key; a cache hit does not replace installation or verification.
-3. Check workflow YAML and review shell commands. Older workflow linters may not understand native `parallel`; GitHub execution must verify those groups.
-4. Run the affected checks and inspect the resulting Actions run. Preserve matrix coverage, build dependencies, artifact paths, and release gates.
-5. Refresh this guide when workflows, action references, or parallel groups change.
-
-Use workflow concurrency to cancel superseded check runs where appropriate. Deployment and release cancellation have different consequences: preserve the workflow’s existing policy rather than copying check-run settings blindly. Repository permissions and job-level overrides are defined in the linked YAML files.
+The [npm proposal](release-proposals/publish.yml) is inactive. Activation,
+registry trust, and actual publication need separate approval; see
+[publishing](../docs/actions-publishing.md). Dry runs cannot verify authentication.

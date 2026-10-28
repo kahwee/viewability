@@ -1,6 +1,8 @@
 ## 1.4.4 (unreleased)
 
-- Update Playwright to 1.64.0, Vite to 8.3.4, and aligned Vitest/V8 coverage to 5.0.4.
+- Update Biome to 2.6.3 and align Vitest/V8 coverage on 5.0.5; retain Playwright 1.64.1 and Vite 8.3.5.
+- Pin current stable GitHub Actions to immutable commits and keep independent checks parallel.
+- Shorten the README, retain detailed API examples, and distinguish the development runtime from Node.js 20 consumer support.
 - Refresh compatible locked development dependencies while retaining the pinned native TypeScript compiler.
 
 ## 1.4.3 (unreleased)

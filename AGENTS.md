@@ -1,5 +1,6 @@
-# Project guidance
+# Viewability
 
+- Use Node.js 24 for development, matching CI; preserve Node.js 20+ package consumers.
 - Preserve the public API and CommonJS subpaths.
 - Keep runtime dependencies at zero.
 - Read each element rectangle only once per public call.
@@ -13,3 +14,10 @@
   CI compatible with the `engines` range.
 - Keep dependency updates focused. Isolate major build-tool upgrades from
   behavior changes and validate the packed ESM, CommonJS, and browser outputs.
+- CI already runs independent source checks in parallel. Keep package generation
+  before shared-artifact consumers and browser jobs; do not race `dist` writes.
+- Keep the concise README linked to [API details](docs/api.md) and contributor
+  guidance. Preserve geometry limitations and the ISC license.
+- The active tag workflow creates GitHub artifacts, not npm publications.
+  The npm proposal in `.github/release-proposals/` remains inactive; activation
+  or registry trust changes require separate approval. Do not tag or publish as a test.

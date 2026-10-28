@@ -2,7 +2,9 @@
 
 ## Setup
 
-Use Node.js 20 or newer:
+Use Node.js 24, matching the CI development runtime, or a compatible newer
+version. The built package supports Node.js 20+; current test/build tools require
+a newer development runtime:
 
 ```sh
 npm ci
