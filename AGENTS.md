@@ -1,6 +1,6 @@
 # Viewability
 
-- Use Node.js 24 for development, matching CI; preserve Node.js 20+ package consumers.
+- Use Node.js 24 for development, matching CI; support Node.js 24+ package consumers.
 - Preserve the public API and CommonJS subpaths.
 - Keep runtime dependencies at zero.
 - Read each element rectangle only once per public call.

@@ -140,7 +140,7 @@
   "author": "KahWee Teng <tengkahwee@gmail.com> (https://kw.sg/)",
   "license": "ISC",
   "engines": {
-    "node": ">=20"
+    "node": ">=24"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.3",

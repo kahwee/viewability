@@ -6,7 +6,7 @@
 job uses Node.js 24 and frozen `npm ci`. Style, types, coverage, and production
 audit run in parallel; builds, package checks, consumer tests, and packing follow.
 
-The checked build is shared with Node.js 20/22 consumer jobs and independent
+The checked build is shared with Node.js 24/26 consumer jobs and independent
 Chromium, Firefox, and WebKit jobs. Preserve artifact names, `needs`, browser
 system dependencies, and failure-report uploads. Do not race writes to `dist`.
 Verification has read-only contents access and cancels superseded runs.

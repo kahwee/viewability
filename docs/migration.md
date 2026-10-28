@@ -1,6 +1,6 @@
 # Migrating to 2.0.0 (release candidate)
 
-Compared with npm 1.3.4, consumers need Node.js 20 or newer, and browsers or bundlers that support ES2018. Development uses Node.js 24.
+Compared with npm 1.3.4, consumers need Node.js 24 or newer, and browsers or bundlers that support ES2018. Development uses Node.js 24.
 
 Package exports now encapsulate arbitrary and internal paths. Replace `viewability/viewability.js` with the documented root `viewability`. For a browser script, replace the old `dist/viewability.js` artifact with `dist/viewability.min.js`. The root, `vertical`, `horizontal`, `isElementOnScreen`, and their historical `.js` subpath aliases remain supported. See [API and examples](api.md).
 

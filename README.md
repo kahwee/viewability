@@ -27,7 +27,7 @@ for axis helpers, CommonJS, focused imports, and browser-script usage. See the
 ## Develop
 
 Use Node.js 24 (the CI development runtime) or a compatible newer version. The
-built package retains Node.js 20+ consumer support.
+built package supports Node.js 24+ consumers.
 
 ```sh
 npm ci
