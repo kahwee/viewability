@@ -1,8 +1,9 @@
 import assert from 'node:assert/strict'
 import { execFileSync } from 'node:child_process'
-import { mkdtemp, readdir, readFile, rm } from 'node:fs/promises'
+import { cp, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import vm from 'node:vm'
 
 const temporaryDirectory = await mkdtemp(join(tmpdir(), 'viewability-package-'))
@@ -55,6 +56,27 @@ try {
   )
 
   const packageRoot = join(temporaryDirectory, 'node_modules', 'viewability')
+  const metadata = JSON.parse(await readFile(join(packageRoot, 'package.json'), 'utf8'))
+  assert.deepEqual(metadata.dependencies ?? {}, {}, 'package must have no runtime dependencies')
+  const apiDocumentation = await readFile(join(packageRoot, 'docs', 'api.md'), 'utf8')
+  assert.match(apiDocumentation, /measure\(element\)/, 'packed README API link must resolve')
+  for (const fixture of ['typescript-esm', 'typescript-cjs']) {
+    const destination = join(temporaryDirectory, fixture)
+    await cp(new URL(`../fixtures/${fixture}/`, import.meta.url), destination, { recursive: true })
+    await writeFile(
+      join(destination, 'package.json'),
+      JSON.stringify({ type: fixture === 'typescript-esm' ? 'module' : 'commonjs' }),
+    )
+    execFileSync(
+      process.execPath,
+      [
+        fileURLToPath(new URL('../node_modules/typescript/bin/tsc', import.meta.url)),
+        '-p',
+        destination,
+      ],
+      { cwd: temporaryDirectory, stdio: 'inherit' },
+    )
+  }
   const browserBundle = await readFile(join(packageRoot, 'dist', 'viewability.min.js'), 'utf8')
   const context = { window: { innerHeight: 100, innerWidth: 100 } }
   vm.runInNewContext(browserBundle, context)

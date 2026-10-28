@@ -95,12 +95,13 @@
   "files": [
     "dist",
     "README.md",
+    "docs/api.md",
     "LICENSE",
     "CHANGELOG.md"
   ],
   "scripts": {
     "clean": "node scripts/clean.mjs",
-    "build": "npm run clean && npm run build:modules && tsgo -p tsconfig.build.json && esbuild src/index.ts --bundle --minify --format=iife --global-name=viewability --outfile=dist/viewability.min.js && node scripts/create-cjs-wrappers.mjs",
+    "build": "npm run clean && npm run build:modules && tsc -p tsconfig.build.json && esbuild src/index.ts --bundle --minify --format=iife --global-name=viewability --outfile=dist/viewability.min.js && node scripts/create-cjs-wrappers.mjs",
     "build:modules": "esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts src/measure.ts --bundle --sourcemap --target=es2018 --outdir=dist --format=esm && esbuild src/index.ts src/vertical.ts src/horizontal.ts src/is-element-on-screen.ts src/measure.ts --bundle --sourcemap --target=es2018 --outdir=dist --format=cjs --out-extension:.js=.bundle.cjs",
     "format": "biome format --write .",
     "format:check": "biome format .",
@@ -108,7 +109,7 @@
     "lint:fix": "biome lint --write .",
     "lint:package": "publint",
     "check:biome": "biome check .",
-    "typecheck": "tsgo --noEmit",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
@@ -143,10 +144,10 @@
   "devDependencies": {
     "@biomejs/biome": "^2.6.3",
     "@playwright/test": "^1.64.1",
-    "@typescript/native-preview": "7.0.0-dev.20260707.2",
     "@vitest/coverage-v8": "^5.0.5",
     "esbuild": "^0.28.2",
     "publint": "^0.3.25",
+    "typescript": "7.0.2",
     "vite": "^8.3.5",
     "vitest": "^5.0.5"
   }

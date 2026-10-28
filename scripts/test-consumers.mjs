@@ -24,8 +24,8 @@ function run(commandPath, args) {
 try {
   runNode('fixtures/node-esm/index.mjs')
   runNode('fixtures/node-cjs/index.cjs')
-  run('node_modules/.bin/tsgo', ['-p', 'fixtures/typescript-esm'])
-  run('node_modules/.bin/tsgo', ['-p', 'fixtures/typescript-cjs'])
+  run('node_modules/.bin/tsc', ['-p', 'fixtures/typescript-esm'])
+  run('node_modules/.bin/tsc', ['-p', 'fixtures/typescript-cjs'])
   runNode('node_modules/vite/bin/vite.js', [
     'build',
     'fixtures/vite',

@@ -4,7 +4,8 @@
 
 Use Node.js 24, matching the CI development runtime, or a compatible newer
 version. The built package supports Node.js 20+; current test/build tools require
-a newer development runtime:
+a newer development runtime. Type checking and declaration generation use the
+stable TypeScript 7 compiler (`tsc`), not the former native preview:
 
 ```sh
 npm ci

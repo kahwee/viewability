@@ -3,7 +3,8 @@
 - Update Biome to 2.6.3 and align Vitest/V8 coverage on 5.0.5; retain Playwright 1.64.1 and Vite 8.3.5.
 - Pin current stable GitHub Actions to immutable commits and keep independent checks parallel.
 - Shorten the README, retain detailed API examples, and distinguish the development runtime from Node.js 20 consumer support.
-- Refresh compatible locked development dependencies while retaining the pinned native TypeScript compiler.
+- Replace the July native TypeScript preview with stable TypeScript 7.0.2 for type checking, declarations, and ESM/CommonJS consumer checks.
+- Include the linked API documentation in the npm archive and verify it in the installed-package smoke test.
 
 ## 1.4.3 (unreleased)
 

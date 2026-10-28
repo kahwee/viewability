@@ -40,5 +40,6 @@ consumers. Browser tests cover Chromium, Firefox, and WebKit. Linux may require
 `npx playwright install --with-deps` on a supported host.
 
 Run `npm run example` for the playground at `http://localhost:4173`.
-See [contributing](CONTRIBUTING.md), [CI](.github/ACTIONS.md), and
+See [contributing](https://github.com/kahwee/viewability/blob/master/CONTRIBUTING.md),
+[CI](https://github.com/kahwee/viewability/blob/master/.github/ACTIONS.md), and
 [release history](CHANGELOG.md). License: [ISC](LICENSE).
