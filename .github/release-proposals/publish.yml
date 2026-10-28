@@ -6,7 +6,8 @@ on:
 permissions:
   contents: read
 concurrency:
-  group: npm-release-${{ github.ref_name }}
+  group: npm-release-viewability
+  queue: max
   cancel-in-progress: false
 jobs:
   publish:
@@ -24,13 +25,12 @@ jobs:
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 26
-      - name: Validate metadata and registry state
-        id: metadata
+      - name: Validate release metadata
         env:
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
           node --test scripts/check-release-guard.mjs
-          node scripts/release-check.mjs "$RELEASE_TAG" --registry
+          node scripts/release-check.mjs "$RELEASE_TAG"
       - name: Require successful CI on this exact source
         env:
           GH_TOKEN: ${{ github.token }}
@@ -53,6 +53,11 @@ jobs:
           tar -tzf "$RUNNER_TEMP"/release/*.tgz
           tar -xOf "$RUNNER_TEMP"/release/*.tgz package/package.json > "$RUNNER_TEMP/packed-package.json"
           node --input-type=module -e 'import { readFileSync } from "node:fs"; const source = JSON.parse(readFileSync("package.json")); const packed = JSON.parse(readFileSync(process.env.RUNNER_TEMP + "/packed-package.json")); if (packed.name !== source.name || packed.version !== source.version || packed.private) throw new Error("Packed package identity differs from checked source")'
+      - name: Check registry and archive identity
+        id: metadata
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: node scripts/release-check.mjs "$RELEASE_TAG" --registry "$RUNNER_TEMP"/release/*.tgz
       - name: Publish checked tarball with npm OIDC
         if: steps.metadata.outputs.should_publish == 'true'
         working-directory: ${{ runner.temp }}
@@ -63,3 +68,7 @@ jobs:
           dist_tag=latest
           if [ "$PRERELEASE" = true ]; then dist_tag=next; fi
           npm publish "$RUNNER_TEMP"/release/*.tgz --ignore-scripts --access public --tag "$dist_tag"
+      - name: Verify published archive and latest tag
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: node scripts/release-check.mjs "$RELEASE_TAG" --verify "$RUNNER_TEMP"/release/*.tgz

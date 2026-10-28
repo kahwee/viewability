@@ -6,7 +6,9 @@ response means the version is immutable; it never forces another upload.
 
 Run `node --test scripts/check-release-guard.mjs` and
 `node scripts/release-check.mjs v<version>` without publishing.
-`--registry` adds a read-only check of the exact public npm version.
+`--registry` without an archive retains the legacy exact-version check. The inactive
+proposal checks the packed archive integrity and latest tag before publication, then
+performs bounded readback after publication or an identical-version skip.
 
 ## Approval proposal
 
