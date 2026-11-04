@@ -1,5 +1,7 @@
 ## 2.0.0 (unreleased candidate)
 
+- Update Biome to 2.6.4 and Vitest with V8 coverage to 5.1.0; refresh compatible development dependencies.
+
 - Require Node.js 24+ for consumers and ES2018-capable browsers or bundlers. Package exports encapsulate internal paths; see the [migration guide](docs/migration.md).
 - Preserve the documented root, axis helpers, `isElementOnScreen`, and historical `.js` aliases; add ESM, types, and `measure`. Elements in iframes use their owning viewport.
 
