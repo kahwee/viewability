@@ -3,7 +3,7 @@
 ## Verification
 
 [`ci.yml`](workflows/ci.yml) runs on `master` pushes and pull requests. The quality
-job uses Node.js 24 and frozen `npm ci`. Style, types, coverage, and production
+job uses Node.js 26.13.0 and frozen `npm ci`. Style, types, coverage, and production
 audit run in parallel; builds, package checks, consumer tests, and packing follow.
 
 The checked build is shared with Node.js 24/26 consumer jobs and independent

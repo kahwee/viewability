@@ -26,7 +26,7 @@ for axis helpers, CommonJS, focused imports, and browser-script usage. See the
 
 ## Develop
 
-Use Node.js 24 (the CI development runtime) or a compatible newer version. The
+Use Node.js 26.13.0 (the CI development runtime) or a compatible newer version. The
 built package supports Node.js 24+ consumers.
 
 ```sh
