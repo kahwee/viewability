@@ -5,6 +5,8 @@ import unittest
 
 
 def check_release_order(source):
+    # The unprivileged build owns all validation and package commands.
+    source = source.split("\n  publish:", 1)[0]
     # This workflow has one job with six-space step entries. Check full step
     # bodies, including multiline commands and setup inputs, in their real order.
     if len(re.findall(r"(?m)^    steps:\s*$", source)) != 1:
@@ -33,6 +35,20 @@ class ReleaseLayoutTests(unittest.TestCase):
     def setUp(self):
         self.source = (Path(__file__).resolve().parent.parent /
                        ".github/workflows/release.yml").read_text()
+
+    def test_publish_authority_is_isolated_from_build_code(self):
+        build, publish = self.source.split("\n  publish:", 1)
+        self.assertIn("contents: read", build)
+        self.assertNotIn("contents: write", build)
+        self.assertIn("persist-credentials: false", build)
+        self.assertIn("needs: build", publish)
+        self.assertIn("contents: write", publish)
+        self.assertIn("ref: ${{ needs.build.outputs.source_sha }}", publish)
+        self.assertIn("persist-credentials: false", publish)
+        self.assertIn("sparse-checkout: scripts/release-assets.py", publish)
+        self.assertIn("name: release-build", publish)
+        self.assertIn("sha256sum --check release/SHA256SUMS", publish)
+        self.assertNotRegex(publish, r"(?:run:|\n\s+)\s*(?:npm|npx|bun)\s")
 
     def test_actual_tag_workflow_checks_out_before_repository_commands(self):
         check_release_order(self.source)
