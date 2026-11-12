@@ -1,8 +1,8 @@
-import { defineConfig } from 'vitest/config'
+import { configDefaults, defineConfig } from 'vitest/config'
 
 export default defineConfig({
   test: {
-    exclude: ['tests/browser/**'],
+    exclude: [...configDefaults.exclude, 'tests/browser/**'],
     coverage: {
       provider: 'v8',
       include: ['src/**/*.ts'],
