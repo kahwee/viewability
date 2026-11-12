@@ -30,8 +30,16 @@ refresh; existing latest-version tags became immutable pins.
 
 [`release.yml`](workflows/release.yml) runs on `v*` tags, validates the version,
 repeats source/package/browser gates, and creates immutable GitHub release
-artifacts. Its existing contents-write permission and recovery guards are
-unchanged. This workflow does not publish to npm.
+artifacts. Validation and dependency/build execution have read-only contents
+access with checkout credential persistence disabled. A fresh dependent job
+receives only the checked artifacts, verifies their checksums, and runs the
+reviewed standard-library uploader with contents-write permission. It does not
+install dependencies or execute package hooks. Immutable asset recovery remains
+in force. This workflow does not publish to npm.
+
+This isolates build/dependency compromise from publishing authority; it does not
+make arbitrary tag authors trusted. Protect version tags and review workflow and
+uploader changes before releases. Repository protection settings are unchanged.
 
 The [npm proposal](release-proposals/publish.yml) is inactive. Activation,
 registry trust, and actual publication need separate approval; see
