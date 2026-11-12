@@ -36,6 +36,13 @@ secret presence and a local login do not prove CI publish access. Do not revoke
 existing credentials or change package security settings as part of this proposal.
 See [npm trusted publishing](https://docs.npmjs.com/trusted-publishers/).
 
+The current inactive proposal still combines dependency/build execution and
+OIDC authority in one job. Do not activate it unchanged: first separate a
+read-only validation/build job from a minimal publisher that installs no project
+dependencies and executes no package hooks. Also verify the protection of
+version tags and the workflow itself; a source ancestry check inside an editable
+tag workflow is not a substitute for access control.
+
 No publishing action or registry trust was enabled by this change. Run the full
 existing CI after review. Authentication remains untested until a separately
 authorized real release; a package dry run does not validate OIDC exchange.
